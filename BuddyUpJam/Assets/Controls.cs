@@ -62,6 +62,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PauseGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""4623b0b2-e4fb-44ea-9fb0-49a78df1dba1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -207,6 +216,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""SelectObject"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2034d2fe-c6c6-4104-aa45-507e0db27573"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -219,6 +239,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Esther_Look = m_Esther.FindAction("Look", throwIfNotFound: true);
         m_Esther_SwapSize = m_Esther.FindAction("SwapSize", throwIfNotFound: true);
         m_Esther_SelectObject = m_Esther.FindAction("SelectObject", throwIfNotFound: true);
+        m_Esther_PauseGame = m_Esther.FindAction("PauseGame", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -282,6 +303,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Esther_Look;
     private readonly InputAction m_Esther_SwapSize;
     private readonly InputAction m_Esther_SelectObject;
+    private readonly InputAction m_Esther_PauseGame;
     public struct EstherActions
     {
         private @Controls m_Wrapper;
@@ -290,6 +312,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Esther_Look;
         public InputAction @SwapSize => m_Wrapper.m_Esther_SwapSize;
         public InputAction @SelectObject => m_Wrapper.m_Esther_SelectObject;
+        public InputAction @PauseGame => m_Wrapper.m_Esther_PauseGame;
         public InputActionMap Get() { return m_Wrapper.m_Esther; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -311,6 +334,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @SelectObject.started -= m_Wrapper.m_EstherActionsCallbackInterface.OnSelectObject;
                 @SelectObject.performed -= m_Wrapper.m_EstherActionsCallbackInterface.OnSelectObject;
                 @SelectObject.canceled -= m_Wrapper.m_EstherActionsCallbackInterface.OnSelectObject;
+                @PauseGame.started -= m_Wrapper.m_EstherActionsCallbackInterface.OnPauseGame;
+                @PauseGame.performed -= m_Wrapper.m_EstherActionsCallbackInterface.OnPauseGame;
+                @PauseGame.canceled -= m_Wrapper.m_EstherActionsCallbackInterface.OnPauseGame;
             }
             m_Wrapper.m_EstherActionsCallbackInterface = instance;
             if (instance != null)
@@ -327,6 +353,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @SelectObject.started += instance.OnSelectObject;
                 @SelectObject.performed += instance.OnSelectObject;
                 @SelectObject.canceled += instance.OnSelectObject;
+                @PauseGame.started += instance.OnPauseGame;
+                @PauseGame.performed += instance.OnPauseGame;
+                @PauseGame.canceled += instance.OnPauseGame;
             }
         }
     }
@@ -337,5 +366,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnSwapSize(InputAction.CallbackContext context);
         void OnSelectObject(InputAction.CallbackContext context);
+        void OnPauseGame(InputAction.CallbackContext context);
     }
 }

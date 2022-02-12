@@ -1,9 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
+    [SerializeField] private GameObject _pauseMenu;
+
 
     [SerializeField] private Color _shrinkColor;
     [SerializeField] private Color _enlargeColor;
@@ -18,18 +20,73 @@ public class GameManager : Singleton<GameManager>
     private bool enlargeRayFired;
     private bool shrinkRayFired;
 
-    private PlayerController playerController;
+    [SerializeField] private Camera _camera;
+    [SerializeField] private Cinemachine.CinemachineVirtualCamera _vcam;
+
+    [SerializeField] private GameObject _playerObj;
+    private PlayerController _playerController;
 
     private void Awake()
     {
-        var playerObj = GameObject.Find("Player");
 
-        if (playerObj != null)
-        {
-            playerController = playerObj.GetComponent<PlayerController>();
-        }       
+        _playerController = _playerObj.GetComponent<PlayerController>();
+
+        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(_playerObj);
+        DontDestroyOnLoad(_camera);
+        DontDestroyOnLoad(_vcam);
+
+        SceneManager.sceneLoaded += LoadLevel;
 
     }
+
+    #region Level Loading/Setup
+
+    private void LoadLevel(Scene scene, LoadSceneMode mode)
+    { 
+        
+    }
+
+    public void StartGame()
+    {
+        // Create player object
+
+        // load tutorial level
+
+    }
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene(0);
+
+        Destroy(_playerObj);
+        Destroy(_camera.gameObject);
+        Destroy(_vcam.gameObject);
+        Destroy(gameObject);
+    }
+
+    public void LoadScene(string sceneName)
+    {
+        // do transition...
+
+        SceneManager.LoadScene(sceneName);
+    }
+
+    #endregion
+
+    #region Pause Menu
+
+    public void ShowHidePauseMenu()
+    {
+        // pause audio...
+       
+
+        _pauseMenu.SetActive(!_pauseMenu.activeInHierarchy);
+    }
+
+    #endregion
+
+    #region Wand Controls/Powers
 
     public Color GetEnlargeColour()
     {
@@ -194,6 +251,8 @@ public class GameManager : Singleton<GameManager>
         shrinkRayFired = false;
         
     }
+
+    #endregion
 
 
 }

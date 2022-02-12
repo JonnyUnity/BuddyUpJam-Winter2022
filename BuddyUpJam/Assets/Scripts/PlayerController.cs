@@ -23,8 +23,10 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rigidBody;
 
     private Transform _transform;
-    [SerializeField] private Transform _cursorOriginTransform;
+        
     [SerializeField] private GameObject _cursorObj;
+    [SerializeField] private GameObject _cursorPivot;
+    private Transform _cursorPivotTransform;
     [SerializeField] private Transform _cursorTransform;
 
     private Renderer _cursorRenderer;
@@ -41,6 +43,9 @@ public class PlayerController : MonoBehaviour
         _camera = Camera.main;
         _transform = transform;
         _rigidBody = GetComponent<Rigidbody2D>();
+
+        _cursorPivotTransform = _cursorPivot.transform;
+
     }
 
     private void Start()
@@ -50,6 +55,11 @@ public class PlayerController : MonoBehaviour
 
         OnMoveEvent.AddListener(Move);
         onStopMovingEvent.AddListener(StopMoving);
+    }
+
+    public void OnPauseGame(InputValue value)
+    {
+        GameManager.Instance.ShowHidePauseMenu();
     }
 
     public void OnMove(InputValue value)
@@ -65,19 +75,22 @@ public class PlayerController : MonoBehaviour
         {
             Vector2 worldPos = _camera.ScreenToWorldPoint(newAim);
 
-            float distanceToCursor = Vector2.Distance(worldPos, (Vector2)_transform.position);
-            newAim = (worldPos - (Vector2)transform.position).normalized;
+            //float distanceToCursor = Vector2.Distance(worldPos, (Vector2)_transform.position);
+            float distanceToCursor = (worldPos - (Vector2)_cursorPivotTransform.position).sqrMagnitude;
+            newAim = (worldPos - (Vector2)_cursorPivotTransform.position).normalized;
             Vector2 cursorVector = newAim;
 
-            if (distanceToCursor < 1f)
+            if (distanceToCursor < 1f * 1f)
             {
                 cursorVector *= 1f;
-                _cursorTransform.position = (Vector2)_transform.position + cursorVector;
+                //_cursorTransform.position = (Vector2)_transform.position + cursorVector;
+                _cursorTransform.position = (Vector2)_cursorPivotTransform.position + cursorVector;
             }
-            else if (distanceToCursor > 3f)
+            else if (distanceToCursor > 3f * 3f)
             {
                 cursorVector *= 3f;
-                _cursorTransform.position = (Vector2)_transform.position + cursorVector;
+                //_cursorTransform.position = (Vector2)_transform.position + cursorVector;
+                _cursorTransform.position = (Vector2)_cursorPivotTransform.position + cursorVector;
             }
             else
             {
