@@ -17,6 +17,8 @@ public class GameManager : Singleton<GameManager>
     private GameObject _objectToEnlarge;
     private GameObject _enlargeAnchor;
 
+    private GameObject _roomObject;
+    
     private bool enlargeRayFired;
     private bool shrinkRayFired;
 
@@ -26,10 +28,14 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameObject _playerObj;
     private PlayerController _playerController;
 
+    [SerializeField] private GameObject _dialoguePanel;
+    private DialogueHandler _dialogueHandler;
+
     private void Awake()
     {
 
         _playerController = _playerObj.GetComponent<PlayerController>();
+        _dialogueHandler = _dialoguePanel.GetComponent<DialogueHandler>();
 
         DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(_playerObj);
@@ -250,6 +256,25 @@ public class GameManager : Singleton<GameManager>
         enlargeRayFired = false;
         shrinkRayFired = false;
         
+    }
+
+    #endregion
+
+    #region Dialogue
+
+    public void OpenDialogue(string text)
+    {
+        _dialogueHandler.ShowDialogue(text);
+    }
+
+    public void CloseDialogue()
+    {
+        _dialogueHandler.HideDialogue();        
+    }
+
+    public bool DialogueIsShowing()
+    {
+        return _dialogueHandler.DialogueIsShowing();
     }
 
     #endregion

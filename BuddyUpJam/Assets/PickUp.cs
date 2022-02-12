@@ -1,23 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class InteractWith : MonoBehaviour
+public class PickUp : MonoBehaviour
 {
 
     [SerializeField] private GameObject _interactPromptPrefab;
     private GameObject _keyPrompt;
-    [SerializeField] private string _interactText;
 
     private Transform _transform;
     private Vector3 _interactSpriteTransform;
     private bool _canInteract;
+    [SerializeField] private bool _canBePickedUp = true;
+    [SerializeField] private float _pickUpableSize = 0.5f;
+
+    private SpriteRenderer _spriteRenderer;
 
     private void Awake()
     {
         _transform = transform;
         _interactSpriteTransform = _transform.position + new Vector3(0, 1f, 0);
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+
     }
 
     private void Update()
@@ -32,21 +37,25 @@ public class InteractWith : MonoBehaviour
 
     }
 
+    public void UpdatePickUpStatus(float currentSize)
+    {
+        _canBePickedUp = (currentSize == _pickUpableSize);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!_canBePickedUp)
+            return;
+
         if (collision.CompareTag("Player"))
         {
             var playerObj = collision.gameObject;
             if (playerObj.TryGetComponent(out PlayerController controller))
             {
-                if (!controller.IsHoldingObject())
-                {
-                    _keyPrompt = Instantiate(_interactPromptPrefab, _interactSpriteTransform, Quaternion.identity);
-                    controller.SetInteractableObject(this);
-                    _canInteract = true;
-                }
+                _keyPrompt = Instantiate(_interactPromptPrefab, _interactSpriteTransform, Quaternion.identity);
+                controller.SetPickableObject(gameObject);
+                _canInteract = true;
             }
-            
         }
     }
 
@@ -56,26 +65,24 @@ public class InteractWith : MonoBehaviour
         var playerObj = collision.gameObject;
         if (playerObj.TryGetComponent(out PlayerController controller))
         {
-            controller.UnsetInteractableObject();
+            controller.UnsetPickableObject();
             Destroy(_keyPrompt);
         }
     }
 
-    public bool DoInteraction()
+    public void PickUpObject()
     {
+        // change sorting layer...
 
-        if (GameManager.Instance.DialogueIsShowing())
-        {
-            GameManager.Instance.CloseDialogue();
-            _keyPrompt.SetActive(true);
-            return false;
-        }
-        else
-        {
-            GameManager.Instance.OpenDialogue(_interactText);
-            _keyPrompt.SetActive(false);
-            return true;
-        }
+
+    }
+
+    public void DropObject()
+    {
+        // reset sorting layer...
+
+        _interactSpriteTransform = _transform.position + new Vector3(0, 1f, 0);
+
     }
 
 }

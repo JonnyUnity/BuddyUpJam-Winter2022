@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour
     private Vector2 _movementDirection;
 
     private Rigidbody2D _rigidBody;
-
     private Transform _transform;
         
     [SerializeField] private GameObject _cursorObj;
@@ -30,6 +29,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform _cursorTransform;
 
     private Renderer _cursorRenderer;
+
+    private InteractWith _interactObj;
+    private GameObject _pickUpObj;
+    private GameObject _heldObject;
+    [SerializeField] private GameObject _heldObjectPosition;
+
+    private PlayerStatesEnum State;
 
     private UnityEvent<Vector2> onMoveEvent = new UnityEvent<Vector2>();
     private UnityEvent onStopMovingEvent = new UnityEvent();
@@ -46,6 +52,8 @@ public class PlayerController : MonoBehaviour
 
         _cursorPivotTransform = _cursorPivot.transform;
 
+        State = PlayerStatesEnum.IDLE;
+
     }
 
     private void Start()
@@ -54,7 +62,7 @@ public class PlayerController : MonoBehaviour
         _cursorRenderer.material.color = GameManager.Instance.GetCursorColour();
 
         OnMoveEvent.AddListener(Move);
-        onStopMovingEvent.AddListener(StopMoving);
+        OnStopMovingEvent.AddListener(StopMoving);
     }
 
     public void OnPauseGame(InputValue value)
@@ -64,6 +72,9 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputValue value)
     {
+        if (State == PlayerStatesEnum.INTERACTING)
+            return;
+
         Vector2 move = value.Get<Vector2>().normalized;
         OnMoveEvent.Invoke(move);
     }
@@ -114,6 +125,71 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void SetInteractableObject(InteractWith interactObject)
+    {
+        _interactObj = interactObject;
+    }
+
+    public void UnsetInteractableObject()
+    {
+        _interactObj = null;
+    }
+
+    public void SetPickableObject(GameObject obj)
+    {
+        _pickUpObj = obj;
+    }    
+
+    public void UnsetPickableObject()
+    {
+        _pickUpObj = null;
+    }
+
+    public bool IsHoldingObject()
+    {
+        return (_heldObject != null);
+    }
+
+
+    public void OnInteract(InputValue value)
+    {
+        Debug.Log("Trying to interact...");
+        if (_heldObject != null)
+        {
+            _heldObject.transform.parent = null;
+            if (_heldObject.TryGetComponent(out PickUp pickup))
+            {
+                pickup.DropObject();
+                _heldObject = null;
+            }            
+        }    
+        else
+        {
+            if (_interactObj != null)
+            {
+                bool interactionActive = _interactObj.DoInteraction();
+                if (interactionActive)
+                {
+                    State = PlayerStatesEnum.INTERACTING;
+                }
+                else
+                {
+                    State = PlayerStatesEnum.IDLE;
+                }
+            }
+            else if (_pickUpObj != null)
+            {
+                Debug.Log("Picking up!");
+                _heldObject = _pickUpObj;
+                _heldObject.transform.parent = _heldObjectPosition.transform;
+                _heldObject.transform.position = _heldObjectPosition.transform.position;
+                
+            }
+        }
+
+    }
+
+
     public void SetHighlightedObject(GameObject highlightedObject, GameObject objectAnchor)
     {
         _highlightedObj = highlightedObject;
@@ -151,4 +227,12 @@ public class PlayerController : MonoBehaviour
 
     }
 
+}
+
+public enum PlayerStatesEnum
+{
+    IDLE,
+    WALKING,
+    USING_WAND,
+    INTERACTING
 }
