@@ -8,10 +8,10 @@ public class PauseMenuHandler : MonoBehaviour
     [SerializeField] private GameObject _pauseMenu;
 
 
-    public void ShowHidePauseMenu()
-    {
-        _pauseMenu.SetActive(!_pauseMenu.activeInHierarchy);
-    }
+    //public void ShowHidePauseMenu()
+    //{
+    //    _pauseMenu.SetActive(!_pauseMenu.activeInHierarchy);
+    //}
 
     public void ReturnToGame()
     {
@@ -19,7 +19,8 @@ public class PauseMenuHandler : MonoBehaviour
 
         // apply settings...
 
-        _pauseMenu.SetActive(false);
+        //_pauseMenu.SetActive(false);
+        GameManager.Instance.ShowHidePauseMenu();
     }
 
     public void ExitGame()
@@ -27,16 +28,4 @@ public class PauseMenuHandler : MonoBehaviour
         GameManager.Instance.LoadMainMenu();
     }
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

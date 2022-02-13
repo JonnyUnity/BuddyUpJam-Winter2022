@@ -11,7 +11,7 @@ public class ShrinkEnlarge : MonoBehaviour
     private Transform _transform;
     private Vector3 _currentScale;
 
-    private float _sizeFactor = 1f;
+    [SerializeField] private float _sizeFactor = 1f;
 
     [SerializeField] private float _maxSizeFactor = 2f;
     [SerializeField] private float _minSizeFactor = 0.5f;

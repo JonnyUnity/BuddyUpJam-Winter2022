@@ -25,15 +25,24 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private Camera _camera;
     [SerializeField] private Cinemachine.CinemachineVirtualCamera _vcam;
 
-    [SerializeField] private GameObject _playerObj;
+    private GameObject _playerObj;
     private PlayerController _playerController;
+
+    [SerializeField] private GameObject _canvas;
+    [SerializeField] private GameObject _eventSystem;
 
     [SerializeField] private GameObject _dialoguePanel;
     private DialogueHandler _dialogueHandler;
 
+    [SerializeField] private GameObject _changeSizePanel;
+
+    [SerializeField] private GameObject _storyBookPanel;
+
+    private GameStatesEnum State;
+
     private void Awake()
     {
-
+        _playerObj = GameObject.FindGameObjectWithTag("Player");
         _playerController = _playerObj.GetComponent<PlayerController>();
         _dialogueHandler = _dialoguePanel.GetComponent<DialogueHandler>();
 
@@ -41,6 +50,10 @@ public class GameManager : Singleton<GameManager>
         DontDestroyOnLoad(_playerObj);
         DontDestroyOnLoad(_camera);
         DontDestroyOnLoad(_vcam);
+        DontDestroyOnLoad(_canvas);
+        DontDestroyOnLoad(_eventSystem);
+
+        State = GameStatesEnum.PLAYING;
 
         SceneManager.sceneLoaded += LoadLevel;
 
@@ -49,8 +62,14 @@ public class GameManager : Singleton<GameManager>
     #region Level Loading/Setup
 
     private void LoadLevel(Scene scene, LoadSceneMode mode)
-    { 
-        
+    {
+        if (scene.buildIndex == 0)
+            return;
+
+        var playerSpawn = GameObject.FindGameObjectWithTag("Spawn");
+        _playerObj = GameObject.FindGameObjectWithTag("Player"); // need to do this again??
+
+        _playerObj.transform.position = playerSpawn.transform.position;
     }
 
     public void StartGame()
@@ -68,14 +87,42 @@ public class GameManager : Singleton<GameManager>
         Destroy(_playerObj);
         Destroy(_camera.gameObject);
         Destroy(_vcam.gameObject);
+        Destroy(_canvas);
+        Destroy(_eventSystem);
         Destroy(gameObject);
+
     }
 
     public void LoadScene(string sceneName)
     {
         // do transition...
+        
 
         SceneManager.LoadScene(sceneName);
+    }
+
+    #endregion
+
+    #region Storybook
+
+    public void OpenStoryBook()
+    {
+
+        if (State == GameStatesEnum.PAUSED)
+            return;
+
+        if (_storyBookPanel.activeInHierarchy)
+        {
+            State = GameStatesEnum.PLAYING;
+            _playerController.ChangeState(PlayerStatesEnum.IDLE);
+            _storyBookPanel.SetActive(false);
+        }
+        else
+        {
+            State = GameStatesEnum.STORYBOOK;
+            _playerController.ChangeState(PlayerStatesEnum.STORYBOOK);
+            _storyBookPanel.SetActive(true);
+        }
     }
 
     #endregion
@@ -85,9 +132,18 @@ public class GameManager : Singleton<GameManager>
     public void ShowHidePauseMenu()
     {
         // pause audio...
-       
+        if (State == GameStatesEnum.PAUSED)
+        {
+            State = GameStatesEnum.PLAYING;
+            _pauseMenu.SetActive(false);
+        }
+        else
+        {
+            _pauseMenu.SetActive(true);
+            State = GameStatesEnum.PAUSED;
+        }
 
-        _pauseMenu.SetActive(!_pauseMenu.activeInHierarchy);
+
     }
 
     #endregion
@@ -138,6 +194,11 @@ public class GameManager : Singleton<GameManager>
 
         }
 
+        if (_objectToEnlarge != null && _objectToShrink != null)
+        {
+            ShowChangeSizeHelp();
+        }
+
         return colourToReturn;
 
     }
@@ -158,6 +219,8 @@ public class GameManager : Singleton<GameManager>
         
         if (_objectToEnlarge != null && _objectToShrink != null)
         {
+            HideChangeSizeHelp();
+
             ShrinkEnlarge se1 = _shrinkAnchor.GetComponent<ShrinkEnlarge>();
             ShrinkEnlarge se2 = _enlargeAnchor.GetComponent<ShrinkEnlarge>();
 
@@ -279,5 +342,21 @@ public class GameManager : Singleton<GameManager>
 
     #endregion
 
+    public void ShowChangeSizeHelp()
+    {
+        _changeSizePanel.SetActive(true);
+    }
 
+    public void HideChangeSizeHelp()
+    {
+        _changeSizePanel.SetActive(false);
+    }
+
+}
+
+public enum GameStatesEnum
+{
+    PLAYING,
+    PAUSED,
+    STORYBOOK
 }

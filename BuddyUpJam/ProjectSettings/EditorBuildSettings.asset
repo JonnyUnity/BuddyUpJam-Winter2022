@@ -6,12 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
+    path: Assets/Scenes/0_MainMenu.unity
     guid: cdcc17b3f01376a4f95c2270fe03a102
   - enabled: 1
-    path: Assets/Scenes/Greybox.unity
+    path: Assets/Scenes/1_Tutorial.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Hallway2.unity
+    path: Assets/Scenes/2_Hallway.unity
     guid: 58a4907beb810914a99c716e07f08a91
+  - enabled: 1
+    path: Assets/Scenes/3_Library.unity
+    guid: 5c789ad6ff37a2048ac507db35d0807d
   m_configObjects: {}

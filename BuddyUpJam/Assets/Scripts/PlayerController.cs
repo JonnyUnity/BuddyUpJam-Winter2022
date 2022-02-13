@@ -72,11 +72,17 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputValue value)
     {
-        if (State == PlayerStatesEnum.INTERACTING)
+        if (State == PlayerStatesEnum.INTERACTING || State == PlayerStatesEnum.STORYBOOK)
             return;
 
         Vector2 move = value.Get<Vector2>().normalized;
         OnMoveEvent.Invoke(move);
+    }
+
+    public void ChangeState(PlayerStatesEnum newState)
+    {
+        State = newState;
+        _movementDirection = Vector2.zero;
     }
 
     public void OnLook(InputValue value)
@@ -122,6 +128,8 @@ public class PlayerController : MonoBehaviour
         renderer.material.color = newColour;
 
         _cursorRenderer.material.color = GameManager.Instance.GetCursorColour();
+
+       
 
     }
 
@@ -234,5 +242,6 @@ public enum PlayerStatesEnum
     IDLE,
     WALKING,
     USING_WAND,
-    INTERACTING
+    INTERACTING,
+    STORYBOOK
 }
