@@ -11,10 +11,9 @@ public class TutorialRoomHandler : MonoBehaviour
 
     [SerializeField] private ShrinkEnlarge _exitDoor;
 
-
-    private void Update()
+    private void Start()
     {
-        CheckRoomSolved();
+        InvokeRepeating("CheckRoomSolved", 1, 1);
     }
 
     public void CheckRoomSolved()

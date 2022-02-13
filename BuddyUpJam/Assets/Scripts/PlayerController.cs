@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     private Renderer _cursorRenderer;
 
     private InteractWith _interactObj;
+    private DropObject _dropObj;
     private GameObject _pickUpObj;
     private GameObject _heldObject;
     [SerializeField] private GameObject _heldObjectPosition;
@@ -138,9 +139,21 @@ public class PlayerController : MonoBehaviour
         _interactObj = interactObject;
     }
 
+    
+
     public void UnsetInteractableObject()
     {
         _interactObj = null;
+    }
+
+    public void SetDropObject(DropObject dropObject)
+    {
+        _dropObj = dropObject;
+    }
+
+    public void UnsetDropObject()
+    {
+        _dropObj = null;
     }
 
     public void SetPickableObject(GameObject obj)
@@ -165,11 +178,20 @@ public class PlayerController : MonoBehaviour
         if (_heldObject != null)
         {
             _heldObject.transform.parent = null;
-            if (_heldObject.TryGetComponent(out PickUp pickup))
+            
+            if (_dropObj != null)
             {
-                pickup.DropObject();
-                _heldObject = null;
-            }            
+                _dropObj.DoDrop(_heldObject);
+            }
+            else
+            {
+                if (_heldObject.TryGetComponent(out PickUp pickup))
+                {
+                    pickup.DropObject();
+                }
+            }
+
+            _heldObject = null;
         }    
         else
         {

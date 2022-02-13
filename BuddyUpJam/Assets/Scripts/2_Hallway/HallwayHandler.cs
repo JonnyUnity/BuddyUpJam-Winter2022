@@ -10,9 +10,9 @@ public class HallwayHandler : MonoBehaviour
 
     [SerializeField] private List<ShrinkEnlarge> _paintings;
 
-    void Update()
+    private void Start()
     {
-        CheckRoomSolved();
+        InvokeRepeating("CheckRoomSolved", 1, 1);
     }
 
     public void CheckRoomSolved()
