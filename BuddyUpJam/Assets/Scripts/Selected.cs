@@ -15,16 +15,18 @@ public class Selected : MonoBehaviour
     private void Awake()
     {
         _renderer = GetComponent<Renderer>();
-        _origColor = _renderer.material.color;
-        _material = _renderer.material;
+        //_origColor = _renderer.material.color;
+        //_material = _renderer.material;
 
-        _propertyBlock = new MaterialPropertyBlock();
-        _renderer.GetPropertyBlock(_propertyBlock);    
+        //_propertyBlock = new MaterialPropertyBlock();
+        //_renderer.GetPropertyBlock(_propertyBlock);    
     }
 
     public void Reset()
     {
-        _renderer.material.color = _origColor;
+        //_renderer.material.color = _origColor;
+        _renderer.material.SetFloat("_MakeRed", 0f);
+        _renderer.material.SetFloat("_MakeBlue", 0f);
     }
 
 }

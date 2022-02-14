@@ -166,14 +166,14 @@ public class GameManager : Singleton<GameManager>
     }
 
 
-    public Color SetSelection(GameObject selectedObject, GameObject objectAnchor)
+    public WandEffectEnum SetSelection(GameObject selectedObject, GameObject objectAnchor)
     {
-        Color colourToReturn;
+        WandEffectEnum wandEffect;
 
         if (selectedObject == _objectToEnlarge)
         {
-            colourToReturn = _enlargeColor;
-            return colourToReturn;
+            //colourToReturn = _enlargeColor;
+            return WandEffectEnum.ENLARGE;
         }
 
         if (_objectToEnlarge == null)
@@ -181,7 +181,7 @@ public class GameManager : Singleton<GameManager>
             _objectToEnlarge = selectedObject;
             _enlargeAnchor = objectAnchor;
 
-            colourToReturn = _enlargeColor;
+            wandEffect = WandEffectEnum.ENLARGE;
             enlargeRayFired = true;
         }
         else
@@ -189,7 +189,7 @@ public class GameManager : Singleton<GameManager>
             _objectToShrink = selectedObject;
             _shrinkAnchor = objectAnchor;
 
-            colourToReturn = _shrinkColor;
+            wandEffect = WandEffectEnum.SHRINK;
             shrinkRayFired = true;
 
         }
@@ -199,7 +199,7 @@ public class GameManager : Singleton<GameManager>
             ShowChangeSizeHelp();
         }
 
-        return colourToReturn;
+        return wandEffect;
 
     }
 
@@ -359,4 +359,10 @@ public enum GameStatesEnum
     PLAYING,
     PAUSED,
     STORYBOOK
+}
+
+public enum WandEffectEnum
+{
+    ENLARGE,
+    SHRINK
 }

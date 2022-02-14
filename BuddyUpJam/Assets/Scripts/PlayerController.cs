@@ -93,7 +93,6 @@ public class PlayerController : MonoBehaviour
         {
             Vector2 worldPos = _camera.ScreenToWorldPoint(newAim);
 
-            //float distanceToCursor = Vector2.Distance(worldPos, (Vector2)_transform.position);
             float distanceToCursor = (worldPos - (Vector2)_cursorPivotTransform.position).sqrMagnitude;
             newAim = (worldPos - (Vector2)_cursorPivotTransform.position).normalized;
             Vector2 cursorVector = newAim;
@@ -101,13 +100,11 @@ public class PlayerController : MonoBehaviour
             if (distanceToCursor < 1f * 1f)
             {
                 cursorVector *= 1f;
-                //_cursorTransform.position = (Vector2)_transform.position + cursorVector;
                 _cursorTransform.position = (Vector2)_cursorPivotTransform.position + cursorVector;
             }
             else if (distanceToCursor > 3f * 3f)
             {
                 cursorVector *= 3f;
-                //_cursorTransform.position = (Vector2)_transform.position + cursorVector;
                 _cursorTransform.position = (Vector2)_cursorPivotTransform.position + cursorVector;
             }
             else
@@ -123,14 +120,23 @@ public class PlayerController : MonoBehaviour
             return;
 
 
-        var newColour = GameManager.Instance.SetSelection(_highlightedObj, _highlightedAnchor);
+        var wandEffect = GameManager.Instance.SetSelection(_highlightedObj, _highlightedAnchor);
 
         var renderer = _highlightedObj.GetComponent<Renderer>();
-        renderer.material.color = newColour;
+        //renderer.material.color = newColour;
+        
+        if (wandEffect == WandEffectEnum.ENLARGE)
+        {
+            renderer.material.SetFloat("_MakeRed", 0f);
+            renderer.material.SetFloat("_MakeBlue", 1f);
+        }
+        else
+        {
+            renderer.material.SetFloat("_MakeRed", 1f);
+            renderer.material.SetFloat("_MakeBlue", 0f);
+        }
 
         _cursorRenderer.material.color = GameManager.Instance.GetCursorColour();
-
-       
 
     }
 

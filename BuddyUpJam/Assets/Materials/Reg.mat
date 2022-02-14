@@ -64,7 +64,20 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Boolean_d475805df46a4ee78eb713e70b071659: 0
     - PixelSnap: 0
     - _AlphaThreshold: 0
     - _Angle: 0
@@ -77,6 +90,7 @@ Material:
     - _GlossMapScale: 0.206
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _MakeRed: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
