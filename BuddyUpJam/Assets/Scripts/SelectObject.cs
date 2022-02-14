@@ -6,6 +6,7 @@ public class SelectObject : MonoBehaviour
 {
 
     private PlayerController _controller;
+    private Renderer _renderer;
 
     private void Awake()
     {
@@ -17,6 +18,9 @@ public class SelectObject : MonoBehaviour
         if (collision.CompareTag("CanChangeSize"))
         {
             Debug.Log("hovering over selectable object " + collision.gameObject.name);
+            _renderer = collision.gameObject.GetComponent<Renderer>();
+            _renderer.material.SetFloat("_ShowOutline", 1f);
+
             var objectAnchor = collision.transform.parent.gameObject;
             Debug.Log(objectAnchor.name + " is the parent!");
             _controller.SetHighlightedObject(collision.gameObject, objectAnchor);
@@ -25,6 +29,7 @@ public class SelectObject : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        _renderer.material.SetFloat("_ShowOutline", 0f);
         _controller.UnsetHighlightedObject();
     }
 

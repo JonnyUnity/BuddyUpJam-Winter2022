@@ -120,21 +120,13 @@ public class PlayerController : MonoBehaviour
             return;
 
 
-        var wandEffect = GameManager.Instance.SetSelection(_highlightedObj, _highlightedAnchor);
+        var newColor = GameManager.Instance.SetSelection(_highlightedObj, _highlightedAnchor);
 
         var renderer = _highlightedObj.GetComponent<Renderer>();
         //renderer.material.color = newColour;
-        
-        if (wandEffect == WandEffectEnum.ENLARGE)
-        {
-            renderer.material.SetFloat("_MakeRed", 0f);
-            renderer.material.SetFloat("_MakeBlue", 1f);
-        }
-        else
-        {
-            renderer.material.SetFloat("_MakeRed", 1f);
-            renderer.material.SetFloat("_MakeBlue", 0f);
-        }
+
+        renderer.material.SetColor("_HighlightColour", newColor);
+        renderer.material.SetFloat("_ShowHighlight", 1f);
 
         _cursorRenderer.material.color = GameManager.Instance.GetCursorColour();
 

@@ -25,8 +25,8 @@ public class Selected : MonoBehaviour
     public void Reset()
     {
         //_renderer.material.color = _origColor;
-        _renderer.material.SetFloat("_MakeRed", 0f);
-        _renderer.material.SetFloat("_MakeBlue", 0f);
+        _renderer.material.SetFloat("_ShowOutline", 0f);
+        _renderer.material.SetFloat("_ShowHighlight", 0f);
     }
 
 }
