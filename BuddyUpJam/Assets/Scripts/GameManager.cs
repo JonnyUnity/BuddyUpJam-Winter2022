@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private GameObject _pauseMenu;
-
+    [SerializeField] private GameObject _pauseBackground;
 
     [SerializeField] private Color _shrinkColor;
     [SerializeField] private Color _enlargeColor;
@@ -36,6 +36,7 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField] private GameObject _changeSizePanel;
 
+    [SerializeField] private GameObject _storyBookButton;
     [SerializeField] private GameObject _storyBookPanel;
 
     private GameStatesEnum State;
@@ -103,7 +104,33 @@ public class GameManager : Singleton<GameManager>
 
     #endregion
 
+    #region Wand/Storybook items
+
+    public void PickupPermanentItem(int item)
+    {
+        if (item == 1)  // wand
+        {
+            _playerController.GainWand();
+        }
+        else if (item == 2) // storybook
+        {
+            PickupStoryBook();
+        }
+    }
+
+    
+
+    #endregion
+
     #region Storybook
+
+    public void PickupStoryBook()
+    {
+
+        _storyBookButton.SetActive(true);
+
+
+    }
 
     public void OpenStoryBook()
     {
@@ -142,8 +169,17 @@ public class GameManager : Singleton<GameManager>
             _pauseMenu.SetActive(true);
             State = GameStatesEnum.PAUSED;
         }
+    }
 
+    public void SetPauseBackground(byte[] imageArray)
+    {
+        Texture2D tex = new Texture2D(500, 500, TextureFormat.ARGB32, false);
+        tex.LoadRawTextureData(imageArray);
+        tex.Apply();
 
+        var sprite = Sprite.Create(tex, new Rect(0, 0, 500, 500), Vector2.zero);
+
+        _pauseBackground.GetComponent<UnityEngine.UI.Image>().sprite = sprite;
     }
 
     #endregion
@@ -204,21 +240,18 @@ public class GameManager : Singleton<GameManager>
     }
 
 
-    private void DrawBeam()
-    {
-        Vector3[] linePositions = new Vector3[]
-        {
-            _objectToShrink.transform.position,
-            _objectToEnlarge.transform.position
-        };
 
-    }
+
 
     public void DoSwapSize()
     {
         
+
+
         if (_objectToEnlarge != null && _objectToShrink != null)
         {
+            PickupStoryBook();
+
             HideChangeSizeHelp();
 
             ShrinkEnlarge se1 = _shrinkAnchor.GetComponent<ShrinkEnlarge>();

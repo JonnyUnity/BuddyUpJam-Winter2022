@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CanChangeSize
   - Spawn
+  - OneTimePickup
   layers:
   - Default
   - TransparentFX

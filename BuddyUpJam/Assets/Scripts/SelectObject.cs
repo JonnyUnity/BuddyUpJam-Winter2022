@@ -29,8 +29,11 @@ public class SelectObject : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        _renderer.material.SetFloat("_ShowOutline", 0f);
-        _controller.UnsetHighlightedObject();
+        if (_renderer != null)
+        {
+            _renderer.material.SetFloat("_ShowOutline", 0f);
+            _controller.UnsetHighlightedObject();
+        }
     }
 
 }

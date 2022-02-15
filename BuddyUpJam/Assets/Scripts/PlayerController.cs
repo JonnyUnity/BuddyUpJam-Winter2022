@@ -123,7 +123,6 @@ public class PlayerController : MonoBehaviour
         var newColor = GameManager.Instance.SetSelection(_highlightedObj, _highlightedAnchor);
 
         var renderer = _highlightedObj.GetComponent<Renderer>();
-        //renderer.material.color = newColour;
 
         renderer.material.SetColor("_HighlightColour", newColor);
         renderer.material.SetFloat("_ShowHighlight", 1f);
@@ -208,15 +207,30 @@ public class PlayerController : MonoBehaviour
             else if (_pickUpObj != null)
             {
                 Debug.Log("Picking up!");
-                _heldObject = _pickUpObj;
-                _heldObject.transform.parent = _heldObjectPosition.transform;
-                _heldObject.transform.position = _heldObjectPosition.transform.position;
+
+                if (_pickUpObj.CompareTag("OneTimePickup"))
+                {
+                    GainWand();
+                    Destroy(_pickUpObj);
+                    _pickUpObj = null;
+                }
+                else
+                {
+                    _heldObject = _pickUpObj;
+                    _heldObject.transform.parent = _heldObjectPosition.transform;
+                    _heldObject.transform.position = _heldObjectPosition.transform.position;
+                }
                 
             }
         }
 
     }
 
+    public void GainWand()
+    {
+        _cursorObj.SetActive(true);
+
+    }
 
     public void SetHighlightedObject(GameObject highlightedObject, GameObject objectAnchor)
     {
@@ -253,6 +267,9 @@ public class PlayerController : MonoBehaviour
 
         _cursorRenderer.material.color = GameManager.Instance.GetCursorColour();
 
+        //byte[] capturedImage = ScreenshotHandler.Screenshot(500, 500);
+
+      //  GameManager.Instance.SetPauseBackground(capturedImage);
     }
 
 }

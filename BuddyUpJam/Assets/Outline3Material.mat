@@ -40,7 +40,7 @@ Material:
     - Vector1_74fedd62249643e1908cdfacb3d21d9d: 0.05
     - _ShowHighlight: 0
     - _ShowOutline: 0
-    - _Thickness: 0.05
+    - _Thickness: 0.06
     m_Colors:
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.5882353}
     - _HighlightColour: {r: 0.06274509, g: 0.06689005, b: 0.8, a: 1}
