@@ -63,10 +63,4 @@ public class WandPickup : MonoBehaviour
         }
     }
 
-    public void PickUpAndDestrory()
-    {
-        Destroy(gameObject);
-    }
-
-
 }

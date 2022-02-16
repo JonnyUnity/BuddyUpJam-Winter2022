@@ -208,9 +208,16 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("Picking up!");
 
-                if (_pickUpObj.CompareTag("OneTimePickup"))
+                if (_pickUpObj.CompareTag("WandPickup"))
                 {
                     GainWand();
+                    AudioManager.Instance.PlayVersionTrack(0);
+                    Destroy(_pickUpObj);
+                    _pickUpObj = null;
+                }
+                else if (_pickUpObj.CompareTag("StorybookPickup"))
+                {
+                    GameManager.Instance.PickupStoryBook();
                     Destroy(_pickUpObj);
                     _pickUpObj = null;
                 }

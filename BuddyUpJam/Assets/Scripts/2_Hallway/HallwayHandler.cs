@@ -10,6 +10,11 @@ public class HallwayHandler : MonoBehaviour
 
     [SerializeField] private List<ShrinkEnlarge> _paintings;
 
+    private void Awake()
+    {
+        AudioManager.Instance.PlayVersionTrack(1);
+    }
+
     private void Start()
     {
         InvokeRepeating("CheckRoomSolved", 1, 1);

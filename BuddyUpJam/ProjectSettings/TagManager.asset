@@ -6,7 +6,8 @@ TagManager:
   tags:
   - CanChangeSize
   - Spawn
-  - OneTimePickup
+  - StorybookPickup
+  - WandPickup
   layers:
   - Default
   - TransparentFX
