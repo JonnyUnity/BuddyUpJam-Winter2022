@@ -9,6 +9,7 @@ public class PickUp : MonoBehaviour
     private GameObject _keyPrompt;
 
     private Transform _transform;
+    [SerializeField] private Transform _parent;
     private Vector3 _interactSpriteTransform;
     private bool _canInteract;
     [SerializeField] private bool _canBePickedUp = true;
@@ -21,8 +22,6 @@ public class PickUp : MonoBehaviour
         _transform = transform;
         _interactSpriteTransform = _transform.position + new Vector3(0, 1f, 0);
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-
-
     }
 
     private void Update()
@@ -81,6 +80,7 @@ public class PickUp : MonoBehaviour
     {
         // reset sorting layer...
 
+        gameObject.transform.parent = _parent;
         _interactSpriteTransform = _transform.position + new Vector3(0, 1f, 0);
 
     }
