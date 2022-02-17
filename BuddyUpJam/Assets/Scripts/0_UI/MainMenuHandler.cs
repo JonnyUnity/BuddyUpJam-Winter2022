@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class MainMenuHandler : MonoBehaviour
 {
@@ -28,6 +29,14 @@ public class MainMenuHandler : MonoBehaviour
 
         
     }
+
+    //public void EnlargeButton(PointerEventData pointerEventData)
+    //{
+    //    Debug.Log(pointerEventData);
+
+    //    //var button = baseEventData.pointerEnter
+
+    //}
 
 
 

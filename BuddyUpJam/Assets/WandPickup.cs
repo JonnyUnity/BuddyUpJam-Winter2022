@@ -35,6 +35,11 @@ public class WandPickup : MonoBehaviour
 
     }
 
+    public void SetCanBePickedUp(bool pickup)
+    {
+        _canBePickedUp = pickup;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!_canBePickedUp)

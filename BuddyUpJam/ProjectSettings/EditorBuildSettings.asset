@@ -7,7 +7,7 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/0_MainMenu.unity
-    guid: cdcc17b3f01376a4f95c2270fe03a102
+    guid: fbeb2f377e06c86419467f23900f5e4d
   - enabled: 1
     path: Assets/Scenes/1_Tutorial.unity
     guid: 2cda990e2423bbf4892e6590ba056729
@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/3_Library.unity
     guid: 5c789ad6ff37a2048ac507db35d0807d
+  - enabled: 1
+    path: Assets/Scenes/99_EndGame.unity
+    guid: cdcc17b3f01376a4f95c2270fe03a102
   m_configObjects: {}

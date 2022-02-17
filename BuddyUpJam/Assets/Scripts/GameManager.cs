@@ -28,6 +28,8 @@ public class GameManager : Singleton<GameManager>
     private GameObject _playerObj;
     private PlayerController _playerController;
 
+    [SerializeField] private WandPickup _wandItem;
+
     [SerializeField] private GameObject _canvas;
     [SerializeField] private GameObject _eventSystem;
 
@@ -38,6 +40,8 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField] private GameObject _storyBookButton;
     [SerializeField] private GameObject _storyBookPanel;
+
+    [SerializeField] private GameObject _mouseControlsPanel;
 
     private GameStatesEnum State;
 
@@ -106,19 +110,23 @@ public class GameManager : Singleton<GameManager>
 
     #region Wand/Storybook items
 
-    public void PickupPermanentItem(int item)
-    {
-        if (item == 1)  // wand
-        {
-            _playerController.GainWand();
-        }
-        else if (item == 2) // storybook
-        {
-            PickupStoryBook();
-        }
-    }
+    //public void PickupPermanentItem(int item)
+    //{
+    //    if (item == 1)  // wand
+    //    {
+    //        _playerController.GainWand();
+    //    }
+    //    else if (item == 2) // storybook
+    //    {
+    //        PickupStoryBook();
+    //    }
+    //}
 
-    
+    public void PickupWand()
+    {
+        AudioManager.Instance.PlayVersionTrack(0);
+        _mouseControlsPanel.SetActive(true);
+    }
 
     #endregion
 
@@ -128,7 +136,7 @@ public class GameManager : Singleton<GameManager>
     {
 
         _storyBookButton.SetActive(true);
-
+        _wandItem.SetCanBePickedUp(true);
 
     }
 
@@ -250,7 +258,6 @@ public class GameManager : Singleton<GameManager>
 
         if (_objectToEnlarge != null && _objectToShrink != null)
         {
-            PickupStoryBook();
 
             HideChangeSizeHelp();
 

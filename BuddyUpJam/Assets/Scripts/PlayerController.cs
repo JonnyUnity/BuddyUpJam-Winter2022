@@ -211,7 +211,7 @@ public class PlayerController : MonoBehaviour
                 if (_pickUpObj.CompareTag("WandPickup"))
                 {
                     GainWand();
-                    AudioManager.Instance.PlayVersionTrack(0);
+                    GameManager.Instance.PickupWand();
                     Destroy(_pickUpObj);
                     _pickUpObj = null;
                 }

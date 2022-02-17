@@ -25,12 +25,12 @@ public class LibraryHandler : MonoBehaviour
 
     private void Start()
     {
-        //_globeTransform = _globeObject.transform;
-        //_potTransform = _potObject.transform;
-        //_featherTransform = _featherObject.transform;
+        _globeTransform = _globeObject.transform;
+        _potTransform = _potObject.transform;
+        _featherTransform = _featherObject.transform;
 
         // Check every second if puzzle has been solved and player can proceed
-        //InvokeRepeating("CheckRoomSolved", 1, 1);
+        InvokeRepeating("CheckRoomSolved", 1, 1);
 
     }
 
