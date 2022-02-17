@@ -29,4 +29,10 @@ public class AudioManager : Singleton<AudioManager>
 
     }
 
+    public void StopPlaying()
+    {
+        _versionThemes.ForEach(f => f.FadeOut(1f));
+    }
+
+
 }

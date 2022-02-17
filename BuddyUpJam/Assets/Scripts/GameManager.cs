@@ -32,6 +32,7 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField] private GameObject _canvas;
     [SerializeField] private GameObject _eventSystem;
+    [SerializeField] private GameObject _audioManager;
 
     [SerializeField] private GameObject _dialoguePanel;
     private DialogueHandler _dialogueHandler;
@@ -87,14 +88,16 @@ public class GameManager : Singleton<GameManager>
 
     public void LoadMainMenu()
     {
-        SceneManager.LoadScene(0);
-
+        
         Destroy(_playerObj);
         Destroy(_camera.gameObject);
         Destroy(_vcam.gameObject);
         Destroy(_canvas);
         Destroy(_eventSystem);
+        Destroy(_audioManager);
         Destroy(gameObject);
+
+        SceneManager.LoadScene(0);
 
     }
 
@@ -125,7 +128,7 @@ public class GameManager : Singleton<GameManager>
     public void PickupWand()
     {
         AudioManager.Instance.PlayVersionTrack(0);
-        _mouseControlsPanel.SetActive(true);
+       // _mouseControlsPanel.SetActive(true);
     }
 
     #endregion

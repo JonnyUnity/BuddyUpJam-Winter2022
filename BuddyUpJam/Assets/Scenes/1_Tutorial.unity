@@ -2781,7 +2781,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc5b4ce8b43f0142a7c7e701cb95a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pauseMenu: {fileID: 1994075421}
 --- !u!1 &996314998
 GameObject:
   m_ObjectHideFlags: 0
@@ -2872,7 +2871,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1994075423}
         m_TargetAssemblyTypeName: SettingsHandler, Assembly-CSharp
         m_MethodName: SetMusicVolume
         m_Mode: 0
@@ -4628,6 +4627,7 @@ MonoBehaviour:
   _wandItem: {fileID: 1332025494}
   _canvas: {fileID: 981780254}
   _eventSystem: {fileID: 1979350230}
+  _audioManager: {fileID: 1056734982}
   _dialoguePanel: {fileID: 2056402866}
   _changeSizePanel: {fileID: 1197971044}
   _storyBookButton: {fileID: 1490088967}
@@ -5562,7 +5562,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1994075423}
         m_TargetAssemblyTypeName: SettingsHandler, Assembly-CSharp
         m_MethodName: SetEffectsVolume
         m_Mode: 0

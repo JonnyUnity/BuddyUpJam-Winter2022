@@ -23,6 +23,7 @@ public class MainMenuHandler : MonoBehaviour
 
     public void StartGame()
     {
+        iTween.Stop();
         Debug.Log("Start Game");
         //_audioSource.
         FadeOutMenuMusic();
