@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     private Transform _cursorPivotTransform;
     [SerializeField] private Transform _cursorTransform;
 
-    private Renderer _cursorRenderer;
+    //private Renderer _cursorRenderer;
 
     private InteractWith _interactObj;
     private DropObject _dropObj;
@@ -61,8 +61,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        _cursorRenderer = _cursorObj.GetComponent<Renderer>();
-        _cursorRenderer.material.color = GameManager.Instance.GetCursorColour();
+        //_cursorRenderer = _cursorObj.GetComponent<Renderer>();
+        //_cursorRenderer.material.color = GameManager.Instance.GetCursorColour();
 
         OnMoveEvent.AddListener(Move);
         OnStopMovingEvent.AddListener(StopMoving);
@@ -143,7 +143,7 @@ public class PlayerController : MonoBehaviour
         renderer.material.SetColor("_HighlightColour", newColor);
         renderer.material.SetFloat("_ShowHighlight", 1f);
 
-        _cursorRenderer.material.color = GameManager.Instance.GetCursorColour();
+        //_cursorRenderer.material.color = GameManager.Instance.GetCursorColour();
 
         AudioManager.Instance.PlayUseWandClip();
 
@@ -223,6 +223,9 @@ public class PlayerController : MonoBehaviour
         {
             if (_interactObj != null)
             {
+                _pickUpObj = _interactObj.DoInteraction();
+            }
+
                 //if (State == PlayerStatesEnum.INTERACTING)
                 //{
                 //    bool moreDialogue = GameManager.Instance.NextDialogue();
@@ -233,20 +236,18 @@ public class PlayerController : MonoBehaviour
                 //}
                 //else
                 //{
-                    bool interactionActive = _interactObj.DoInteraction();
-                    //if (interactionActive)
-                    //{
-                    //    State = PlayerStatesEnum.INTERACTING;
-                    //}
-                    //else
-                    //{
-                    //    State = PlayerStatesEnum.IDLE;
-                    //}
+
+                //if (interactionActive)
+                //{
+                //    State = PlayerStatesEnum.INTERACTING;
+                //}
+                //else
+                //{
+                //    State = PlayerStatesEnum.IDLE;
+                //}
                 //}
 
-               
-            }
-            else if (_pickUpObj != null)
+            if (_pickUpObj != null)
             {
                 Debug.Log("Picking up!");
                 State = PlayerStatesEnum.NARRATION;
@@ -273,6 +274,7 @@ public class PlayerController : MonoBehaviour
                         pickup.PickUpObject();
                     }
                     _heldObject = _pickUpObj;
+                    _heldObject.SetActive(true);
                     _heldObject.transform.parent = _heldObjectPosition.transform;
                     _heldObject.transform.position = _heldObjectPosition.transform.position;
                 }
@@ -327,7 +329,7 @@ public class PlayerController : MonoBehaviour
 
         GameManager.Instance.DoSwapSize();
 
-        _cursorRenderer.material.color = GameManager.Instance.GetCursorColour();
+        //_cursorRenderer.material.color = GameManager.Instance.GetCursorColour();
 
         State = PlayerStatesEnum.IDLE;
 

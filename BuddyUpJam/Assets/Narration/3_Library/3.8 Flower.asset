@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c8c6e9a9beacb14fbb4f213aa0a87ef, type: 3}
-  m_Name: 3.1.2 Enter
+  m_Name: 3.8 Flower
   m_EditorClassIdentifier: 
-  FirstLine: Another door, bolted and barred
-  SecondLine: Can she use her wand to clear a path?
+  FirstLine: She finds a flower, stem and petal
+  SecondLine: A horticultural gem, a precious metal
   AudioClip: {fileID: 0}

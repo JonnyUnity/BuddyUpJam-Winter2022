@@ -19,12 +19,14 @@ public class ShrinkEnlarge : MonoBehaviour
     [SerializeField] private float _wiggleDuration = 0.25f;
 
     private PickUp _pickUp;
+    private DropObject _dropObject;
 
     private void Awake()
     {
         _transform = transform;
         _currentScale = _transform.localScale;
         _pickUp = GetComponent<PickUp>();
+        _dropObject = GetComponent<DropObject>();
 
     }
 
@@ -60,7 +62,12 @@ public class ShrinkEnlarge : MonoBehaviour
         {
             _pickUp.UpdatePickUpStatus(_sizeFactor);
         }
+        if (_dropObject != null)
+        {
+            _dropObject.UpdateDroppableStatus(_sizeFactor);
+        }
     }
+
 
     public IEnumerator TransformCoroutine(float transformFactor, float timeToTransform)
     {

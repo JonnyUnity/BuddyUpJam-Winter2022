@@ -7,16 +7,23 @@ public class LibraryHandler : MonoBehaviour
     [SerializeField] private GameObject _exitTrigger;
 
     [SerializeField] private GameObject _globeObject;
-    private Transform _globeTransform;
     [SerializeField] private GameObject _desiredGlobePosition;
 
     [SerializeField] private GameObject _potObject;
-    private Transform _potTransform;
     [SerializeField] private GameObject _desiredPotPosition;
 
     [SerializeField] private GameObject _featherObject;
-    private Transform _featherTransform;
     [SerializeField] private GameObject _desiredFeatherPosition;
+
+    [SerializeField] private GameObject _flowerObject;
+
+    private Transform _globeTransform;
+    private Transform _featherTransform;
+    private Transform _potTransform;
+
+    [SerializeField] private Interaction[] _potionBrewedCouplets;
+    private bool _isPotionBrewed;
+    private bool _potionBrewedNarrationDone;
 
     private void Awake()
     {
@@ -37,6 +44,19 @@ public class LibraryHandler : MonoBehaviour
     public void CheckRoomSolved()
     {
 
+        if (!_potionBrewedNarrationDone)
+        {
+
+            if (IsPotionBrewed())
+            {
+
+                StartCoroutine(GameManager.Instance.OpenDialogue(_potionBrewedCouplets));
+                _isPotionBrewed = true;
+                _potionBrewedNarrationDone = true;
+            }
+
+        }
+
         if (IsRoomSolved())
         {
 
@@ -47,6 +67,11 @@ public class LibraryHandler : MonoBehaviour
 
             // then destory object?
         }
+    }
+
+    private bool IsPotionBrewed()
+    {
+        return (!_featherObject.activeInHierarchy && !_flowerObject.activeInHierarchy);
     }
 
     private bool IsRoomSolved()
@@ -67,16 +92,20 @@ public class LibraryHandler : MonoBehaviour
             return false;
         }
 
-        if (_potTransform.position != _desiredPotPosition.transform.position)
+        if (!_isPotionBrewed)
         {
             return false;
         }
 
-        if (_featherTransform.position != _desiredFeatherPosition.transform.position)
-        {
-            return false;
-        }
+        //if (_potTransform.position != _desiredPotPosition.transform.position)
+        //{
+        //    return false;
+        //}
 
+        //if (_featherTransform.position != _desiredFeatherPosition.transform.position)
+        //{
+        //    return false;
+        //}
 
         return true;
 

@@ -7,13 +7,17 @@ public class DropObject : MonoBehaviour
 
     [SerializeField] private Transform _dropPosition;
     [SerializeField] private GameObject _interactPromptPrefab;
+    [SerializeField] private bool _showDroppedObject;
+    [SerializeField] private float _droppableSize = 1f;
+    [SerializeField] private bool _canBeDroppedTo;
+    [SerializeField] private Interaction[] _couplets;
+
     private GameObject _keyPrompt;
-
     private GameObject _placedObject;
-
     private Transform _transform;
     private Vector3 _interactSpriteTransform;
     private bool _canInteract;
+    
 
     private void Awake()
     {
@@ -33,6 +37,11 @@ public class DropObject : MonoBehaviour
 
     }
 
+    public void UpdateDroppableStatus(float currentSize)
+    {
+        _canBeDroppedTo = (currentSize == _droppableSize);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -40,7 +49,7 @@ public class DropObject : MonoBehaviour
             var playerObj = collision.gameObject;
             if (playerObj.TryGetComponent(out PlayerController controller))
             {
-                if (controller.IsHoldingObject())
+                if (controller.IsHoldingObject() && _canBeDroppedTo)
                 {
                     _canInteract = true;
                     _keyPrompt = Instantiate(_interactPromptPrefab, _interactSpriteTransform, Quaternion.identity);
@@ -66,7 +75,7 @@ public class DropObject : MonoBehaviour
             var playerObj = collision.gameObject;
             if (playerObj.TryGetComponent(out PlayerController controller))
             {
-                if (controller.IsHoldingObject())
+                if (controller.IsHoldingObject() && _canBeDroppedTo)
                 {
                     _canInteract = true;
                     if (_keyPrompt == null)
@@ -102,10 +111,21 @@ public class DropObject : MonoBehaviour
     public void DoDrop(GameObject objectBeingDropped)
     {
         objectBeingDropped.transform.parent = null;
-        objectBeingDropped.transform.position = _dropPosition.position;
-        _placedObject = objectBeingDropped;
-        PickUp pickup = _placedObject.GetComponent<PickUp>();
-        pickup.DropObject();
+
+        if (_showDroppedObject)
+        {
+            objectBeingDropped.transform.position = _dropPosition.position;
+            _placedObject = objectBeingDropped;
+            PickUp pickup = _placedObject.GetComponent<PickUp>();
+            pickup.DropObject();
+        }
+        else
+        {
+            objectBeingDropped.SetActive(false);
+        }
+
+        StartCoroutine(GameManager.Instance.OpenDialogue(_couplets));
+
         if (_keyPrompt != null)
         {
             Destroy(_keyPrompt);

@@ -80,8 +80,10 @@ public class GameManager : Singleton<GameManager>
         var playerSpawn = GameObject.FindGameObjectWithTag("Spawn");
         _playerObj = GameObject.FindGameObjectWithTag("Player"); // need to do this again??
 
-        _playerObj.transform.position = playerSpawn.transform.position;
-
+        if (playerSpawn != null && _playerObj != null)
+        {
+            _playerObj.transform.position = playerSpawn.transform.position;
+        }
 
     }
 
@@ -110,6 +112,19 @@ public class GameManager : Singleton<GameManager>
         Destroy(gameObject);
 
         SceneManager.LoadScene(0);
+
+    }
+
+    public void EndGame()
+    {
+        Destroy(_playerObj);
+        Destroy(_camera.gameObject);
+        Destroy(_vcam.gameObject);
+        Destroy(_canvas);
+        Destroy(_eventSystem);
+        Destroy(_audioManager);
+        Destroy(gameObject);
+
 
     }
 
@@ -393,11 +408,6 @@ public class GameManager : Singleton<GameManager>
     #endregion
 
     #region Dialogue
-
-    public void OpenDialogue(string text)
-    {
-        _dialogueHandler.ShowDialogue(text);
-    }
 
     public IEnumerator OpenDialogue(Interaction[] couplets)
     {

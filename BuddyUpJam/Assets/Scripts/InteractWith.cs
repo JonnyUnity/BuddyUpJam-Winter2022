@@ -6,16 +6,17 @@ using UnityEngine.Events;
 public class InteractWith : MonoBehaviour
 {
 
-    [SerializeField] private GameObject _interactPromptPrefab;
-    [SerializeField] private Transform _interactPromptPosition;
-    [SerializeField] private string _interactText;
+    [SerializeField] protected GameObject _interactPromptPrefab;
+    [SerializeField] protected Transform _interactPromptPosition;
+    [SerializeField] protected Interaction[] _couplets;
+    [SerializeField] protected bool _singleInteraction;
 
-    [SerializeField] private Interaction[] _couplets;
 
-    private GameObject _keyPrompt;
-    private Transform _transform;
-    private Vector3 _interactSpriteTransform;
-    private bool _canInteract;
+    protected GameObject _keyPrompt;
+    protected Transform _transform;
+    protected Vector3 _interactSpriteTransform;
+    protected bool _canInteract;
+    protected bool _alreadyInteracted;
 
     private void Awake()
     {
@@ -28,6 +29,7 @@ public class InteractWith : MonoBehaviour
     {
         if (!_canInteract)
             return;
+
         if (GameManager.Instance.GetState() == GameStatesEnum.NARRATION)
         {
             _keyPrompt.SetActive(false);
@@ -48,6 +50,9 @@ public class InteractWith : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (_singleInteraction && _alreadyInteracted)
+            return;
+
         if (collision.CompareTag("Player"))
         {
             var playerObj = collision.gameObject;
@@ -66,7 +71,7 @@ public class InteractWith : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (_canInteract)
+        if (_canInteract || _singleInteraction && _alreadyInteracted)
             return;
 
         if (collision.CompareTag("Player"))
@@ -93,28 +98,20 @@ public class InteractWith : MonoBehaviour
         if (playerObj.TryGetComponent(out PlayerController controller))
         {
             controller.UnsetInteractableObject();
-            Destroy(_keyPrompt);
         }
+        Destroy(_keyPrompt);
+
     }
 
-    public bool DoInteraction()
+    public virtual GameObject DoInteraction()
     {
 
         StartCoroutine(GameManager.Instance.OpenDialogue(_couplets));
-        return true;
-
-        //if (GameManager.Instance.DialogueIsShowing())
-        //{
-        //    GameManager.Instance.CloseDialogue();
-        //    _keyPrompt.SetActive(true);
-        //    return false;
-        //}
-        //else
-        //{
-        //    GameManager.Instance.OpenDialogue(_interactText);
-        //    _keyPrompt.SetActive(false);
-        //    return true;
-        //}
+        if (_singleInteraction)
+        {
+            _alreadyInteracted = true;
+        }
+        return null;
     }
 
 }

@@ -8,6 +8,7 @@ public class ExitRoomTrigger : MonoBehaviour
 
     [SerializeField] private string _sceneName;
     [SerializeField] private Interaction[] _couplets;
+    [SerializeField] private bool _isFinalLevel;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -25,15 +26,12 @@ public class ExitRoomTrigger : MonoBehaviour
         if (_couplets.Length != 0)
         {
             yield return StartCoroutine(GameManager.Instance.OpenDialogue(_couplets));
-
-            //do
-            //{
-            //    yield return null;
-            //}
-            //while (GameManager.Instance.GetState() == GameStatesEnum.NARRATION);
-
         }
 
+        if (_isFinalLevel)
+        {
+            GameManager.Instance.EndGame();
+        }
         GameManager.Instance.LoadScene(_sceneName);
 
     }

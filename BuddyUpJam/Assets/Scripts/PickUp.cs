@@ -15,13 +15,11 @@ public class PickUp : MonoBehaviour
     private Transform _transform;
     private Vector3 _interactSpriteTransform;
     private bool _canInteract;
-    private SpriteRenderer _spriteRenderer;
 
     private void Awake()
     {
         _transform = transform;
         _interactSpriteTransform = _transform.position + new Vector3(0, 1f, 0);
-        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     private void Update()
@@ -74,7 +72,7 @@ public class PickUp : MonoBehaviour
         // change sorting layer...
         //yield return StartCoroutine(GameManager.Instance.OpenDialogue(_couplets));
 
-        GameManager.Instance.OpenDialogue(_couplets);
+        StartCoroutine(GameManager.Instance.OpenDialogue(_couplets));
 
     }
 
