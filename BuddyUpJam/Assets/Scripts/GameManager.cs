@@ -75,20 +75,13 @@ public class GameManager : Singleton<GameManager>
         if (scene.buildIndex == 0)
             return;
 
-        _vcam.LookAt = null;
-        _vcam.Follow = null;
-        _vcam.enabled = false;
-        _camera.enabled = false;
+        _vcam.PreviousStateIsValid = false;
 
         var playerSpawn = GameObject.FindGameObjectWithTag("Spawn");
         _playerObj = GameObject.FindGameObjectWithTag("Player"); // need to do this again??
 
         _playerObj.transform.position = playerSpawn.transform.position;
 
-        _camera.enabled = true;
-        _vcam.enabled = true;
-        _vcam.LookAt = _playerObj.transform;
-        _vcam.Follow = _playerObj.transform;
 
     }
 
@@ -178,7 +171,7 @@ public class GameManager : Singleton<GameManager>
     public void OpenStoryBook()
     {
 
-        if (State == GameStatesEnum.PAUSED)
+        if (State == GameStatesEnum.PAUSED || State == GameStatesEnum.NARRATION)
             return;
 
         if (_storyBookPanel.activeInHierarchy)
@@ -193,6 +186,8 @@ public class GameManager : Singleton<GameManager>
             _playerController.ChangeState(PlayerStatesEnum.STORYBOOK);
             _storyBookPanel.SetActive(true);
         }
+
+        AudioManager.Instance.PlayStorybookOpenCloseClip();
     }
 
     #endregion
@@ -301,6 +296,8 @@ public class GameManager : Singleton<GameManager>
             
             if (se1.CanTransform(0.5f) && se2.CanTransform(2f))
             {
+                AudioManager.Instance.PlayShrinkEnlargeClip();
+
                 Vector3 newScale = _shrinkAnchor.transform.localScale;
                 newScale *= 0.5f;
 

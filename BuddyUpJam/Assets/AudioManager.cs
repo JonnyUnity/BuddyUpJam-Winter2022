@@ -7,6 +7,12 @@ public class AudioManager : Singleton<AudioManager>
 {
 
     [SerializeField] private AudioSource[] _versionThemes;
+    [SerializeField] private AudioSource _soundEffect;
+
+    [SerializeField] private AudioClip _openCloseStoryBookClip;
+    [SerializeField] private AudioClip _useWandClip;
+    [SerializeField] private AudioClip _shrinkEnlargeClip;
+    [SerializeField] private AudioClip _CatClip;
 
     private bool IsPlaying;
 
@@ -34,5 +40,24 @@ public class AudioManager : Singleton<AudioManager>
         _versionThemes.ForEach(f => f.FadeOut(1f));
     }
 
+    public void PlayStorybookOpenCloseClip()
+    {
+        _soundEffect.PlayOneShot(_openCloseStoryBookClip);
+    }
+
+    public void PlayUseWandClip()
+    {
+        _soundEffect.PlayOneShot(_useWandClip);
+    }
+
+    public void PlayShrinkEnlargeClip()
+    {
+        _soundEffect.PlayOneShot(_shrinkEnlargeClip);
+    }
+
+    public void PlayCatClip()
+    {
+        _soundEffect.PlayOneShot(_CatClip);
+    }
 
 }

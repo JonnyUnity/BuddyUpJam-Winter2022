@@ -145,6 +145,8 @@ public class PlayerController : MonoBehaviour
 
         _cursorRenderer.material.color = GameManager.Instance.GetCursorColour();
 
+        AudioManager.Instance.PlayUseWandClip();
+
     }
 
     public void SetInteractableObject(InteractWith interactObject)
@@ -318,6 +320,9 @@ public class PlayerController : MonoBehaviour
 
     public void OnSwapSize()
     {
+        if (State == PlayerStatesEnum.INTERACTING || State == PlayerStatesEnum.NARRATION)
+            return;
+
         State = PlayerStatesEnum.RESIZING;
 
         GameManager.Instance.DoSwapSize();
