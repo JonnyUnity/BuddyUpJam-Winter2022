@@ -44,6 +44,9 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField] private GameObject _mouseControlsPanel;
 
+    [SerializeField] private Interaction[] _pickUpStorybookCouplets;
+    [SerializeField] private Interaction[] _pickUpWandCouplets;
+
     private GameStatesEnum State;
 
     private void Awake()
@@ -97,6 +100,11 @@ public class GameManager : Singleton<GameManager>
 
     }
 
+    public GameStatesEnum GetState()
+    {
+        return State;
+    }
+
     public void LoadMainMenu()
     {
         
@@ -136,20 +144,33 @@ public class GameManager : Singleton<GameManager>
     //    }
     //}
 
-    public void PickupWand()
+    public IEnumerator PickupWand()
     {
         AudioManager.Instance.PlayVersionTrack(0);
-       // _mouseControlsPanel.SetActive(true);
+        State = GameStatesEnum.NARRATION;
+
+        Debug.Log("Start narration");
+        yield return StartCoroutine(OpenDialogue(_pickUpWandCouplets));
+        //_dialogueHandler.ShowCouplets(_pickUpWandCouplets);
+        Debug.Log("narration over");
+
     }
 
     #endregion
 
     #region Storybook
 
-    public void PickupStoryBook()
+    public IEnumerator PickupStoryBook()
     {
 
         _storyBookButton.SetActive(true);
+        State = GameStatesEnum.NARRATION;
+
+        Debug.Log("Start narration");
+        yield return StartCoroutine(OpenDialogue(_pickUpStorybookCouplets));
+        //_dialogueHandler.ShowCouplets(_pickUpStorybookCouplets);
+        Debug.Log("narration over");
+
         _wandItem.SetCanBePickedUp(true);
 
     }
@@ -180,13 +201,13 @@ public class GameManager : Singleton<GameManager>
 
     public void ShowHidePauseMenu()
     {
-        // pause audio...
+        // pause audio?...
         if (State == GameStatesEnum.PAUSED)
         {
             State = GameStatesEnum.PLAYING;
             _pauseMenu.SetActive(false);
         }
-        else
+        else if (State != GameStatesEnum.NARRATION)
         {
             _pauseMenu.SetActive(true);
             State = GameStatesEnum.PAUSED;
@@ -268,8 +289,6 @@ public class GameManager : Singleton<GameManager>
     public void DoSwapSize()
     {
         
-
-
         if (_objectToEnlarge != null && _objectToShrink != null)
         {
 
@@ -347,7 +366,6 @@ public class GameManager : Singleton<GameManager>
             shrinkRayFired = false;
         }
 
-
     }
 
     public void ResetSelection(GameObject obj)
@@ -384,6 +402,40 @@ public class GameManager : Singleton<GameManager>
         _dialogueHandler.ShowDialogue(text);
     }
 
+    public IEnumerator OpenDialogue(Interaction[] couplets)
+    {
+        _playerController.ChangeState(PlayerStatesEnum.NARRATION);
+        State = GameStatesEnum.NARRATION;
+
+        _dialogueHandler.NarrationPlaying = true;
+        Debug.Log(_dialogueHandler.NarrationPlaying);
+        yield return _dialogueHandler.ShowCouplets(couplets);
+        Debug.Log(_dialogueHandler.NarrationPlaying);
+
+        //while (_dialogueHandler.NarrationPlaying)
+        //{
+        //    Debug.Log(_dialogueHandler.NarrationPlaying);
+        //    //yield return null;
+        //}
+
+        State = GameStatesEnum.PLAYING;
+        _playerController.ChangeState(PlayerStatesEnum.IDLE);
+
+    }
+
+    public bool NextDialogue()
+    {
+        bool moreDialogue = _dialogueHandler.NextDialogue();
+
+        if (!moreDialogue)
+        {
+            State = GameStatesEnum.PLAYING;
+        }    
+
+        return moreDialogue;
+    }
+
+
     public void CloseDialogue()
     {
         _dialogueHandler.HideDialogue();        
@@ -412,7 +464,8 @@ public enum GameStatesEnum
 {
     PLAYING,
     PAUSED,
-    STORYBOOK
+    STORYBOOK,
+    NARRATION
 }
 
 public enum WandEffectEnum

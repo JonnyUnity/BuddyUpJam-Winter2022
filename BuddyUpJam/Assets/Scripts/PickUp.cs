@@ -5,16 +5,16 @@ using UnityEngine;
 public class PickUp : MonoBehaviour
 {
 
-    [SerializeField] private GameObject _interactPromptPrefab;
-    private GameObject _keyPrompt;
-
-    private Transform _transform;
+    [SerializeField] private GameObject _interactPromptPrefab;    
     [SerializeField] private Transform _parent;
-    private Vector3 _interactSpriteTransform;
-    private bool _canInteract;
     [SerializeField] private bool _canBePickedUp = true;
     [SerializeField] private float _pickUpableSize = 0.5f;
+    [SerializeField] private Interaction[] _couplets;
 
+    private GameObject _keyPrompt;
+    private Transform _transform;
+    private Vector3 _interactSpriteTransform;
+    private bool _canInteract;
     private SpriteRenderer _spriteRenderer;
 
     private void Awake()
@@ -72,7 +72,9 @@ public class PickUp : MonoBehaviour
     public void PickUpObject()
     {
         // change sorting layer...
+        //yield return StartCoroutine(GameManager.Instance.OpenDialogue(_couplets));
 
+        GameManager.Instance.OpenDialogue(_couplets);
 
     }
 

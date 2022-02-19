@@ -36,6 +36,8 @@ public class PlayerController : MonoBehaviour
     private GameObject _heldObject;
     [SerializeField] private GameObject _heldObjectPosition;
 
+    
+    
     private PlayerStatesEnum State;
 
     private UnityEvent<Vector2> onMoveEvent = new UnityEvent<Vector2>();
@@ -73,18 +75,32 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputValue value)
     {
-        if (State == PlayerStatesEnum.INTERACTING || State == PlayerStatesEnum.STORYBOOK)
+        if (State == PlayerStatesEnum.INTERACTING || State == PlayerStatesEnum.STORYBOOK || State == PlayerStatesEnum.NARRATION)
             return;
 
         Vector2 move = value.Get<Vector2>().normalized;
         OnMoveEvent.Invoke(move);
     }
 
+    #region State functions
+
     public void ChangeState(PlayerStatesEnum newState)
     {
         State = newState;
         _movementDirection = Vector2.zero;
     }
+
+    public bool IsResizing()
+    {
+        return (State == PlayerStatesEnum.RESIZING);
+    }
+
+    public bool IsInteracting()
+    {
+        return (State == PlayerStatesEnum.INTERACTING);
+    }
+
+    #endregion
 
     public void OnLook(InputValue value)
     {
@@ -171,6 +187,17 @@ public class PlayerController : MonoBehaviour
 
     public void OnInteract(InputValue value)
     {
+        if (State == PlayerStatesEnum.NARRATION)
+        {
+            //bool moreDialogue = GameManager.Instance.NextDialogue();
+            //if (!moreDialogue)
+            //{
+            //    State = PlayerStatesEnum.IDLE;
+            //}
+
+            return;
+        }
+
         Debug.Log("Trying to interact...");
         if (_heldObject != null)
         {
@@ -194,35 +221,55 @@ public class PlayerController : MonoBehaviour
         {
             if (_interactObj != null)
             {
-                bool interactionActive = _interactObj.DoInteraction();
-                if (interactionActive)
-                {
-                    State = PlayerStatesEnum.INTERACTING;
-                }
-                else
-                {
-                    State = PlayerStatesEnum.IDLE;
-                }
+                //if (State == PlayerStatesEnum.INTERACTING)
+                //{
+                //    bool moreDialogue = GameManager.Instance.NextDialogue();
+                //    if (!moreDialogue)
+                //    {
+                //        State = PlayerStatesEnum.IDLE;
+                //    }
+                //}
+                //else
+                //{
+                    bool interactionActive = _interactObj.DoInteraction();
+                    if (interactionActive)
+                    {
+                        State = PlayerStatesEnum.INTERACTING;
+                    }
+                    else
+                    {
+                        State = PlayerStatesEnum.IDLE;
+                    }
+                //}
+
+               
             }
             else if (_pickUpObj != null)
             {
                 Debug.Log("Picking up!");
+                State = PlayerStatesEnum.NARRATION;
 
                 if (_pickUpObj.CompareTag("WandPickup"))
                 {
+                    StartCoroutine(GameManager.Instance.PickupWand());
                     GainWand();
-                    GameManager.Instance.PickupWand();
+
                     Destroy(_pickUpObj);
                     _pickUpObj = null;
                 }
                 else if (_pickUpObj.CompareTag("StorybookPickup"))
                 {
-                    GameManager.Instance.PickupStoryBook();
+
+                    StartCoroutine(GameManager.Instance.PickupStoryBook());
                     Destroy(_pickUpObj);
                     _pickUpObj = null;
                 }
                 else
                 {
+                    if (_pickUpObj.TryGetComponent(out PickUp pickup))
+                    {
+                        pickup.PickUpObject();
+                    }
                     _heldObject = _pickUpObj;
                     _heldObject.transform.parent = _heldObjectPosition.transform;
                     _heldObject.transform.position = _heldObjectPosition.transform.position;
@@ -235,6 +282,7 @@ public class PlayerController : MonoBehaviour
 
     public void GainWand()
     {
+        //State = PlayerStatesEnum.NARRATION;
         _cursorObj.SetActive(true);
 
     }
@@ -270,13 +318,14 @@ public class PlayerController : MonoBehaviour
 
     public void OnSwapSize()
     {
+        State = PlayerStatesEnum.RESIZING;
+
         GameManager.Instance.DoSwapSize();
 
         _cursorRenderer.material.color = GameManager.Instance.GetCursorColour();
 
-        //byte[] capturedImage = ScreenshotHandler.Screenshot(500, 500);
+        State = PlayerStatesEnum.IDLE;
 
-      //  GameManager.Instance.SetPauseBackground(capturedImage);
     }
 
 }
@@ -287,5 +336,7 @@ public enum PlayerStatesEnum
     WALKING,
     USING_WAND,
     INTERACTING,
+    NARRATION,
+    RESIZING,
     STORYBOOK
 }

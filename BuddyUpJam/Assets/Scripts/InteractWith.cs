@@ -7,9 +7,10 @@ public class InteractWith : MonoBehaviour
 {
 
     [SerializeField] private GameObject _interactPromptPrefab;
-    private GameObject _keyPrompt;
+    [SerializeField] private Transform _interactPromptPosition;
     [SerializeField] private string _interactText;
 
+    private GameObject _keyPrompt;
     private Transform _transform;
     private Vector3 _interactSpriteTransform;
     private bool _canInteract;
@@ -17,7 +18,8 @@ public class InteractWith : MonoBehaviour
     private void Awake()
     {
         _transform = transform;
-        _interactSpriteTransform = _transform.position + new Vector3(0, 1f, 0);
+        //_interactSpriteTransform = _transform.position + new Vector3(0, 1f, 0);
+        _interactSpriteTransform = _interactPromptPosition.position;
     }
 
     private void Update()
@@ -39,7 +41,7 @@ public class InteractWith : MonoBehaviour
             var playerObj = collision.gameObject;
             if (playerObj.TryGetComponent(out PlayerController controller))
             {
-                if (!controller.IsHoldingObject())
+                if (!controller.IsHoldingObject() && !controller.IsResizing())
                 {
                     _keyPrompt = Instantiate(_interactPromptPrefab, _interactSpriteTransform, Quaternion.identity);
                     controller.SetInteractableObject(this);
@@ -49,6 +51,28 @@ public class InteractWith : MonoBehaviour
             
         }
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (_canInteract)
+            return;
+
+        if (collision.CompareTag("Player"))
+        {
+            var playerObj = collision.gameObject;
+            if (playerObj.TryGetComponent(out PlayerController controller))
+            {
+                if (!controller.IsHoldingObject() && !controller.IsResizing())
+                {
+                    _keyPrompt = Instantiate(_interactPromptPrefab, _interactSpriteTransform, Quaternion.identity);
+                    controller.SetInteractableObject(this);
+                    _canInteract = true;
+                }
+            }
+
+        }
+    }
+
 
     private void OnTriggerExit2D(Collider2D collision)
     {

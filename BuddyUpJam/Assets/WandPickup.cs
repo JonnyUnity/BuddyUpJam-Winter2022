@@ -6,12 +6,15 @@ public class WandPickup : MonoBehaviour
 {
 
     [SerializeField] private GameObject _interactPromptPrefab;
+    [SerializeField] private bool _canBePickedUp = true;
+    [SerializeField] private Interaction[] _couplets;
+
     private GameObject _keyPrompt;
 
     private Transform _transform;
     private Vector3 _interactSpriteTransform;
     private bool _canInteract;
-    [SerializeField] private bool _canBePickedUp = true;
+    
 
     private SpriteRenderer _spriteRenderer;
 
