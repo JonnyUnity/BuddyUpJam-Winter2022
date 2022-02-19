@@ -10,6 +10,8 @@ public class InteractWith : MonoBehaviour
     [SerializeField] private Transform _interactPromptPosition;
     [SerializeField] private string _interactText;
 
+    [SerializeField] private Interaction[] _couplets;
+
     private GameObject _keyPrompt;
     private Transform _transform;
     private Vector3 _interactSpriteTransform;
@@ -26,11 +28,21 @@ public class InteractWith : MonoBehaviour
     {
         if (!_canInteract)
             return;
+        if (GameManager.Instance.GetState() == GameStatesEnum.NARRATION)
+        {
+            _keyPrompt.SetActive(false);
+        }
+        else
+        {
+            _keyPrompt.SetActive(true);
 
-        var pos = _keyPrompt.transform.position;
+            var pos = _keyPrompt.transform.position;
 
-        float newY = _interactSpriteTransform.y + (0.1f * Mathf.Sin(Time.time * 3f));
-        _keyPrompt.transform.position = new Vector3(pos.x, newY, 0);
+            float newY = _interactSpriteTransform.y + (0.1f * Mathf.Sin(Time.time * 3f));
+            _keyPrompt.transform.position = new Vector3(pos.x, newY, 0);
+        }
+
+
 
     }
 
@@ -88,18 +100,21 @@ public class InteractWith : MonoBehaviour
     public bool DoInteraction()
     {
 
-        if (GameManager.Instance.DialogueIsShowing())
-        {
-            GameManager.Instance.CloseDialogue();
-            _keyPrompt.SetActive(true);
-            return false;
-        }
-        else
-        {
-            GameManager.Instance.OpenDialogue(_interactText);
-            _keyPrompt.SetActive(false);
-            return true;
-        }
+        StartCoroutine(GameManager.Instance.OpenDialogue(_couplets));
+        return true;
+
+        //if (GameManager.Instance.DialogueIsShowing())
+        //{
+        //    GameManager.Instance.CloseDialogue();
+        //    _keyPrompt.SetActive(true);
+        //    return false;
+        //}
+        //else
+        //{
+        //    GameManager.Instance.OpenDialogue(_interactText);
+        //    _keyPrompt.SetActive(false);
+        //    return true;
+        //}
     }
 
 }

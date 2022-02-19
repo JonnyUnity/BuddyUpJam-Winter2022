@@ -234,14 +234,14 @@ public class PlayerController : MonoBehaviour
                 //else
                 //{
                     bool interactionActive = _interactObj.DoInteraction();
-                    if (interactionActive)
-                    {
-                        State = PlayerStatesEnum.INTERACTING;
-                    }
-                    else
-                    {
-                        State = PlayerStatesEnum.IDLE;
-                    }
+                    //if (interactionActive)
+                    //{
+                    //    State = PlayerStatesEnum.INTERACTING;
+                    //}
+                    //else
+                    //{
+                    //    State = PlayerStatesEnum.IDLE;
+                    //}
                 //}
 
                
