@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -41,6 +42,8 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField] private GameObject _storyBookButton;
     [SerializeField] private GameObject _storyBookPanel;
+    [SerializeField] private Image _storyBookImage;
+    [SerializeField] private Sprite[] _storyBookPages;
 
     [SerializeField] private GameObject _mouseControlsPanel;
 
@@ -204,6 +207,9 @@ public class GameManager : Singleton<GameManager>
         }
         else
         {
+            int storyBookIndex = SceneManager.GetActiveScene().buildIndex - 1;
+            _storyBookImage.sprite = _storyBookPages[storyBookIndex];
+
             State = GameStatesEnum.STORYBOOK;
             _playerController.ChangeState(PlayerStatesEnum.STORYBOOK);
             _storyBookPanel.SetActive(true);

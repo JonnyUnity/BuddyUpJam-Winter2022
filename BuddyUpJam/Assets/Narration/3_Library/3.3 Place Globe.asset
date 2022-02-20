@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8c6e9a9beacb14fbb4f213aa0a87ef, type: 3}
   m_Name: 3.3 Place Globe
   m_EditorClassIdentifier: 
-  FirstLine: The gloe is placed atop the table,
+  FirstLine: The globe is placed atop the table,
   SecondLine: But that's just half of this puzzling fable
   AudioClip: {fileID: 8300000, guid: d0ce203b3acb4664b87fca0c5576c232, type: 3}

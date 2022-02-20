@@ -90,7 +90,7 @@ public class DropObject : MonoBehaviour
                     // pick back up?
                 }
             }
-
+            
         }
     }
 
@@ -117,7 +117,7 @@ public class DropObject : MonoBehaviour
             objectBeingDropped.transform.position = _dropPosition.position;
             _placedObject = objectBeingDropped;
             PickUp pickup = _placedObject.GetComponent<PickUp>();
-            pickup.DropObject();
+            pickup.DropObject(this);
         }
         else
         {
@@ -133,6 +133,10 @@ public class DropObject : MonoBehaviour
         _canInteract = false;
     }
 
+    public void DoPickup()
+    {
+        _placedObject = null;
+    }
 
 
 

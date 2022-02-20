@@ -20,6 +20,8 @@ public class PickUp : MonoBehaviour
     private Vector3 _interactSpriteTransform;
     private bool _canInteract;
 
+    private DropObject _containerObject;
+
     private void Awake()
     {
         _transform = transform;
@@ -79,6 +81,12 @@ public class PickUp : MonoBehaviour
             _spriteCollider.enabled = false;
         }        
         
+        if (_containerObject != null)
+        {
+            _containerObject.DoPickup();
+            _containerObject = null;
+        }
+
         if (!_playCoupletsOnce)
         {
             StartCoroutine(GameManager.Instance.OpenDialogue(_couplets));
@@ -91,13 +99,15 @@ public class PickUp : MonoBehaviour
     }
 
 
-    public void DropObject()
+    public void DropObject(DropObject containerObject)
     {
         // reset sorting layer...
         if (_spriteCollider != null)
         {
             _spriteCollider.enabled = true;
-        }        
+        }
+
+        _containerObject = containerObject;
 
         gameObject.transform.parent = _parent;
         _interactSpriteTransform = _transform.position + new Vector3(0, 1f, 0);

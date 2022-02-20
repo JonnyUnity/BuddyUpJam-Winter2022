@@ -28,8 +28,6 @@ public class PlayerController : MonoBehaviour
     private Transform _cursorPivotTransform;
     [SerializeField] private Transform _cursorTransform;
 
-    //private Renderer _cursorRenderer;
-
     private InteractWith _interactObj;
     private DropObject _dropObj;
     private GameObject _pickUpObj;
@@ -245,7 +243,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (_heldObject.TryGetComponent(out PickUp pickup))
                 {
-                    pickup.DropObject();
+                    pickup.DropObject(null);
                 }
             }
 

@@ -12,6 +12,8 @@ public class LibraryHandler : MonoBehaviour
     [SerializeField] private GameObject _potObject;
     [SerializeField] private GameObject _desiredPotPosition;
 
+    [SerializeField] private GameObject _potDropInObject;
+
     [SerializeField] private GameObject _featherObject;
     [SerializeField] private GameObject _flowerObject;
 
@@ -105,7 +107,11 @@ public class LibraryHandler : MonoBehaviour
     private bool IsPotCorrect()
     {
         
-        if (_potTransform.position != _desiredPotPosition.transform.position)
+        if (_potTransform.position == _desiredPotPosition.transform.position)
+        {
+            _potDropInObject.SetActive(true);
+        }
+        else
         {
             return false;
         }
