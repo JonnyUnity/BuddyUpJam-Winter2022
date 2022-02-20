@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: The window's fake; a pastel painting
   SecondLine: A morning scene of night-time waning
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: efc91d572eb0761438a239daf2a35afe, type: 3}

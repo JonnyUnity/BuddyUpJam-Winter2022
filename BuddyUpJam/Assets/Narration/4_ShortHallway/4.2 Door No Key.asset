@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: The door is locked, she'll need a key
   SecondLine: Is there a hiding placing that she can't see?
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: 9a1999bb7a5966847b85f102a8b3d000, type: 3}

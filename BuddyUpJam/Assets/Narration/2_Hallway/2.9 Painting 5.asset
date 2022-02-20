@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: The wand in the story brought power true
   SecondLine: Is Esther's wand that powerful too?
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: aa58e1d1adaef2245961b091cff5a231, type: 3}

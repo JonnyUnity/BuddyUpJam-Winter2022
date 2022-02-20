@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: A shrunken globe of tiny lands;
   SecondLine: Esther grabs it in her hands
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: e53666b1dec882f48bdfb5c0546c73e9, type: 3}

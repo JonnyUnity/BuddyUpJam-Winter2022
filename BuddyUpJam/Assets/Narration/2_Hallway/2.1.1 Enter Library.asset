@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: So little Esther decided to roam
   SecondLine: Around the house that she called home
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: 24cc5add961e1e5448d9578c203ea7d1, type: 3}

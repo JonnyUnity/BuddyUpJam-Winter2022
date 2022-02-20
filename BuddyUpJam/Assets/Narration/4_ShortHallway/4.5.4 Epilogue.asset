@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: There lived a girl;
   SecondLine: Her name was Esther
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: 6a1b746c3412cf94194b8e38cf32afac, type: 3}

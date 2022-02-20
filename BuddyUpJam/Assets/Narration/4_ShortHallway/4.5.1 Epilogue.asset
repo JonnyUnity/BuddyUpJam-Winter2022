@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: So now you've heard my humble story
   SecondLine: Not one of gold and hero's glory
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: 6b72f33beff29784581d3fa81e2d1325, type: 3}

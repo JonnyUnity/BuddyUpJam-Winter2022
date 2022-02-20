@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: A perfidious cat, black and scrawny
   SecondLine: A wiser girl would heed this warning...
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: 1d056bcfffe890143b1ebf28ca744b79, type: 3}

@@ -10,11 +10,7 @@ public class LibraryHandler : MonoBehaviour
     [SerializeField] private GameObject _desiredGlobePosition;
 
     [SerializeField] private GameObject _potObject;
-    [SerializeField] private GameObject _desiredPotPosition;
-
     [SerializeField] private GameObject _featherObject;
-    [SerializeField] private GameObject _desiredFeatherPosition;
-
     [SerializeField] private GameObject _flowerObject;
 
     private Transform _globeTransform;
@@ -37,7 +33,7 @@ public class LibraryHandler : MonoBehaviour
         _featherTransform = _featherObject.transform;
 
         // Check every second if puzzle has been solved and player can proceed
-        InvokeRepeating("CheckRoomSolved", 1, 1);
+        InvokeRepeating(nameof(CheckRoomSolved), 1, 1);
 
     }
 
@@ -60,12 +56,9 @@ public class LibraryHandler : MonoBehaviour
         if (IsRoomSolved())
         {
 
-            // other possible dialogue?
             Debug.Log("Room solved!");
-
             _exitTrigger.SetActive(true);
 
-            // then destory object?
         }
     }
 

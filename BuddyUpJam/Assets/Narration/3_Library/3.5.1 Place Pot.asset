@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: The pot enlarges and fills the space
   SecondLine: But still the doors are fixed in place
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: ab17b3836de542a409b28c1f6327882b, type: 3}

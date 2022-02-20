@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: A library; a place for learning
   SecondLine: But what Esther sees is most concerning
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: 1a3ff5ff42486c042b7ff792b03b6107, type: 3}

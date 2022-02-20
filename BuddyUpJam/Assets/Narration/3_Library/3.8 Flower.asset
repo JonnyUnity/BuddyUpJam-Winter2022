@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: She finds a flower, stem and petal
   SecondLine: A horticultural gem, a precious metal
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: 1ad20a2ca2a8f4f4ca0157e3c14fe2b0, type: 3}

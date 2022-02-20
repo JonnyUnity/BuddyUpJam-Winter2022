@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: Where small is big and big is small
   SecondLine: And no one answers her cry nor call
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: d4fa1b92908903348ab6245a48b886db, type: 3}

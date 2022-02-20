@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: Come on dear Esther, the exit's near!
   SecondLine: Let's escape this house and laugh and cheer!
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: 1a9ae8734d9c6b047bc7a90448e167c0, type: 3}

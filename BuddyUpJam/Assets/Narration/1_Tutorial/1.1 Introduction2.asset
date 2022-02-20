@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: But one more soothing; simpler; true
   SecondLine: A happy yarn from me to you
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: c60bedfff20e22e45bc6bb0871b7efe2, type: 3}

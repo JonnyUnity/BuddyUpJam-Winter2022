@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: But don't forget the storybook;
   SecondLine: It might be worth another look
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: 48c11dec9dc6523428cb04523c7b0c81, type: 3}

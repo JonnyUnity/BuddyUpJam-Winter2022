@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: She spots a tiny door inside the bedsit
   SecondLine: Far too small to be a suitable exit
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: 7621f8227e0f36143a38b2fc592af27f, type: 3}

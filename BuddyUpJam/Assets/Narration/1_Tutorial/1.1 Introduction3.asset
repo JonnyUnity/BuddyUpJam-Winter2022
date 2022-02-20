@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: Our story starts inside a house
   SecondLine: Cute cottage walls, built with nous
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: c365079afa115a941aef9f68475884d5, type: 3}

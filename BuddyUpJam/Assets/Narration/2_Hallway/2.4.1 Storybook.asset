@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: Esther sits and reads a while
   SecondLine: A story written in parable style
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: d9fd85f2f0fb3994fbe4a38ab28bcc1d, type: 3}

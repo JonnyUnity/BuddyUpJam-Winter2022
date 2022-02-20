@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: Another door, bolted and barred
   SecondLine: Can she use her wand to clear a path?
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: d86722ebdf5062c4d8f574d3dfd51875, type: 3}

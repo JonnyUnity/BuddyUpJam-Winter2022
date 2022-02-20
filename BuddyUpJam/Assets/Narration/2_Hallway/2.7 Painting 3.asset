@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: But when the wand was taken away
   SecondLine: The witch's power began to decay
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: 4c78a71ae60483c429d7d8fe6906fba0, type: 3}

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: A picket fence, a roof, a door
   SecondLine: A little girl sat on a bedroom floor
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: d626dba63587ebc4493b5b7e84e4c3c3, type: 3}

@@ -90,6 +90,10 @@ public class ContainerInteraction : InteractWith
     {
 
         StartCoroutine(GameManager.Instance.OpenDialogue(_couplets));
+        if (_singleInteraction)
+        {
+            _alreadyInteracted = true;
+        }
         return _containedObject;
     }
 

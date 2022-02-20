@@ -7,7 +7,6 @@ public class HallwayHandler : MonoBehaviour
 {
 
     [SerializeField] private GameObject _exitTrigger;
-
     [SerializeField] private List<ShrinkEnlarge> _paintings;
 
     private void Awake()
@@ -17,7 +16,7 @@ public class HallwayHandler : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating("CheckRoomSolved", 1, 1);
+        InvokeRepeating(nameof(CheckRoomSolved), 1, 0.1f);
     }
 
     public void CheckRoomSolved()
@@ -25,10 +24,6 @@ public class HallwayHandler : MonoBehaviour
 
         if (IsRoomSolved())
         {
-
-            // other possible dialogue?
-            Debug.Log("Room solved!");
-
             _exitTrigger.SetActive(true);
         }
     }

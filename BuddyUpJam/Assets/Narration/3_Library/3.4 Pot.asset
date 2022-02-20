@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: She grabs a pot, small and stout
   SecondLine: And moves to wave her wand about
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: 33c73b270e2a28244a1eb2c3da4a8ad9, type: 3}

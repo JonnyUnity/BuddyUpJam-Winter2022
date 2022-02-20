@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: At last dear Esther clasps her eyes
   SecondLine: On the wand she's been looking for all this time
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: e95693ce0d5966b458b3a8314a3517b5, type: 3}

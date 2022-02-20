@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: Point it at an object and a simple click
   SecondLine: Will make that object enlarge or shrink
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: 8d064c94dfaaa0a4296bac62c8eb542b, type: 3}

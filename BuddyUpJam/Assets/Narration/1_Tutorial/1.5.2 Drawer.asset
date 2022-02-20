@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: 1.5.2 Drawer
   m_EditorClassIdentifier: 
   FirstLine: She goes to search around the bed,
-  SecondLine: The comft place where she lays her head.
-  AudioClip: {fileID: 0}
+  SecondLine: The comfy place where she lays her head.
+  AudioClip: {fileID: 8300000, guid: 40b2265400b28f241b855eb4c54e5cc5, type: 3}

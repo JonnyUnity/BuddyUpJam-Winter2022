@@ -9,6 +9,7 @@ public class DialogueHandler : MonoBehaviour
     [SerializeField] private GameObject _dialoguePanel;
     [SerializeField] private TMPro.TextMeshProUGUI _line1;
     [SerializeField] private TMPro.TextMeshProUGUI _line2;
+    [SerializeField] private AudioSource _audioSource;
 
     private Interaction[] _couplets;
     private int _coupletIndex;
@@ -32,7 +33,11 @@ public class DialogueHandler : MonoBehaviour
 
             _coupletIndex++;
 
-            yield return new WaitForSeconds(3f);
+            //yield return new WaitForSeconds(3f);
+            //AudioSource.Play();
+            _audioSource.PlayOneShot(couplet.AudioClip);
+            yield return new WaitWhile(() => _audioSource.isPlaying);
+
 
         }
 

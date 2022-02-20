@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: Settle now, and hear my tale
   SecondLine: Not one of knights and the Holy Grail
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: fbe25a41c0fdb6449adf6e5eb9df322b, type: 3}

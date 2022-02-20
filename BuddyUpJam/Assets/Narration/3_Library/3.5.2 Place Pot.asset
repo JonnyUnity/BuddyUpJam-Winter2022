@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: Since the doors still seem unwilling
   SecondLine: Perhaps the pot just needs a filling?
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: 168cea88be44a8742917a55363dd8527, type: 3}

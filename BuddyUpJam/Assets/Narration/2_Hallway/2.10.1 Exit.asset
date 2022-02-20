@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: So the wand is that of a witch, you see
   SecondLine: But it's the perfect tool to set Esther free
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: 648e78c6845a6e641a90ae7e488ee3f4, type: 3}

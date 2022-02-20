@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: She opens the drawer but there's nothing inside.
   SecondLine: 'There are other places she might''ve tried:'
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: 0e1c5343614f9c141b9b2fc23a0b7001, type: 3}

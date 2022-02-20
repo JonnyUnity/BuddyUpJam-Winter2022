@@ -10,7 +10,7 @@ public class EnterRoomNarration : MonoBehaviour
 
     private void Start()
     {
-        StartNarration();
+        Invoke(nameof(StartNarration), 1);
     }
 
     public void StartNarration()

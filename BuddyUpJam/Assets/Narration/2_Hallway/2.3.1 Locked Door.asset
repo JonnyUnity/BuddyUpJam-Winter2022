@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: The door is locked
   SecondLine: Esther's path is blocked
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: bfd63bfca3bb64f44baaed3893a9a7b0, type: 3}

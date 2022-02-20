@@ -36,13 +36,17 @@ public class PlayerController : MonoBehaviour
     private GameObject _heldObject;
     [SerializeField] private GameObject _heldObjectPosition;
 
-    
+    private bool _isFirstMove = true;
+    [SerializeField] private Interaction[] _firstMoveCouplets;
+    [SerializeField] private Interaction[] _firstWandInHallwayCouplets;
+    [SerializeField] private Interaction[] _firstStorybookCouplets;
     
     private PlayerStatesEnum State;
 
     private UnityEvent<Vector2> onMoveEvent = new UnityEvent<Vector2>();
     private UnityEvent onStopMovingEvent = new UnityEvent();
-   
+
+    public Animator _wandAnimator;
 
     public UnityEvent<Vector2> OnMoveEvent => onMoveEvent;
     public UnityEvent OnStopMovingEvent => onStopMovingEvent;
@@ -78,8 +82,16 @@ public class PlayerController : MonoBehaviour
         if (State == PlayerStatesEnum.INTERACTING || State == PlayerStatesEnum.STORYBOOK || State == PlayerStatesEnum.NARRATION)
             return;
 
-        Vector2 move = value.Get<Vector2>().normalized;
-        OnMoveEvent.Invoke(move);
+        if (_isFirstMove)
+        {
+            StartCoroutine(GameManager.Instance.OpenDialogue(_firstMoveCouplets));
+            _isFirstMove = false;
+        }
+        else
+        {
+            Vector2 move = value.Get<Vector2>().normalized;
+            OnMoveEvent.Invoke(move);
+        }
     }
 
     #region State functions
@@ -135,6 +147,7 @@ public class PlayerController : MonoBehaviour
         if (_highlightedObj == null)
             return;
 
+        _wandAnimator.SetTrigger("UseWand");
 
         var newColor = GameManager.Instance.SetSelection(_highlightedObj, _highlightedAnchor);
 
@@ -142,8 +155,6 @@ public class PlayerController : MonoBehaviour
 
         renderer.material.SetColor("_HighlightColour", newColor);
         renderer.material.SetFloat("_ShowHighlight", 1f);
-
-        //_cursorRenderer.material.color = GameManager.Instance.GetCursorColour();
 
         AudioManager.Instance.PlayUseWandClip();
 

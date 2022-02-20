@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: 'beneath the pillow: a storybook'
   SecondLine: She opens the cover to take a look
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: ee751ebfd8d4d6a4688f80c525b78972, type: 3}

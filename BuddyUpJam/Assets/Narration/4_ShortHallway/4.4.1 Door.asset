@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: The key doesn't work - how can this be?
   SecondLine: Everything's not as it seems you see
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: c107aec2f6718a4479481700fdb73569, type: 3}

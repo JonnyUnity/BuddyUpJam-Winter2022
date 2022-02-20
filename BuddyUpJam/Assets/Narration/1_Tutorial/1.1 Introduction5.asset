@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: And although for now she is just a guest here
   SecondLine: This story's hers; her name is Esther
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: 37b67832e16bc6a459ec5a2ed6631a8c, type: 3}

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: The door swings open. What a spot of luck!
   SecondLine: Finding that wand when you were stuck
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: 0aa4f8f7980b5794fa923396325e5510, type: 3}

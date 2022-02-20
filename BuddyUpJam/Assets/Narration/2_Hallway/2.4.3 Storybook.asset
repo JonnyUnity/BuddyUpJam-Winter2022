@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: Lining the sides of the great hall
   SecondLine: Against the faded peel-paint wall
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: 9f0d622e314aaa24fb4a0bf799fc2dc5, type: 3}

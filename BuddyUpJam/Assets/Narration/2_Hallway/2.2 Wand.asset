@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: My my Esther, should you have that wand?
   SecondLine: The tool with which you will abscond?
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: 5c0a1432e71c9144792a78a40f54c9ba, type: 3}

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FirstLine: 'The potion brewed, the door clasps loosen:'
   SecondLine: Another solution to an occluding illusion
-  AudioClip: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: 1678545d83a89194eb850e3fa23fb233, type: 3}
