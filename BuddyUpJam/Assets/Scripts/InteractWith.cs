@@ -53,6 +53,9 @@ public class InteractWith : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!this.enabled)
+            return;
+
         if (_singleInteraction && _alreadyInteracted)
             return;
 
@@ -74,6 +77,9 @@ public class InteractWith : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        if (!this.enabled)
+            return;
+
         if (_canInteract || _singleInteraction && _alreadyInteracted)
             return;
 
@@ -107,6 +113,11 @@ public class InteractWith : MonoBehaviour
             Destroy(_keyPrompt);
         }       
 
+    }
+
+    public bool AlreadyInteractedWith()
+    {
+        return _alreadyInteracted;
     }
 
     public virtual GameObject DoInteraction()

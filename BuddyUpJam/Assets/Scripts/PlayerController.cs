@@ -255,6 +255,7 @@ public class PlayerController : MonoBehaviour
         {
             if (_interactObj != null)
             {
+                State = PlayerStatesEnum.NARRATION;
                 _pickUpObj = _interactObj.DoInteraction();
             }
 
@@ -302,9 +303,7 @@ public class PlayerController : MonoBehaviour
 
     public void GainWand()
     {
-        //State = PlayerStatesEnum.NARRATION;
         _cursorObj.SetActive(true);
-
     }
 
     public void SetHighlightedObject(GameObject highlightedObject, GameObject objectAnchor)

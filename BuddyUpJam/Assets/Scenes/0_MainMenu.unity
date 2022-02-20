@@ -411,8 +411,6 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'ESTHER
 
-    (Working Title)
-
 '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 82345252637bdc24996f482197b69641, type: 2}

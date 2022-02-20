@@ -10,7 +10,8 @@ public class FinalRoomHandler : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating("CheckRoomSolved", 1, 1);
+        AudioManager.Instance.StopPlaying();
+        InvokeRepeating(nameof(CheckRoomSolved), 1, 1);
     }
 
 
