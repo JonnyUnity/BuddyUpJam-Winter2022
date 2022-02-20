@@ -47,6 +47,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private Interaction[] _pickUpStorybookCouplets;
     [SerializeField] private Interaction[] _pickUpWandCouplets;
 
+    private bool _isTutorialLevel = true;
+
     private GameStatesEnum State;
 
     private void Awake()
@@ -74,6 +76,11 @@ public class GameManager : Singleton<GameManager>
     {
         if (scene.buildIndex == 0)
             return;
+
+        if (scene.buildIndex > 1)
+        {
+            _isTutorialLevel = false;
+        }
 
         _vcam.PreviousStateIsValid = false;
 
@@ -239,21 +246,34 @@ public class GameManager : Singleton<GameManager>
 
     #region Wand Controls/Powers
 
-    public Color GetEnlargeColour()
-    {
-        return _enlargeColor;
-    }
+    //public Color GetEnlargeColour()
+    //{
+    //    return _enlargeColor;
+    //}
 
-    public Color GetShrinkColour()
-    {
-        return _shrinkColor;
-    }
+    //public Color GetShrinkColour()
+    //{
+    //    return _shrinkColor;
+    //}
 
-    public Color GetCursorColour()
-    {
-        return enlargeRayFired ? _shrinkColor : _enlargeColor;
-    }
+    //public Color GetCursorColour()
+    //{
+    //    return enlargeRayFired ? _shrinkColor : _enlargeColor;
+    //}
 
+    public bool CanSelect()
+    {
+        if (_objectToEnlarge == null)
+        {
+            return true;
+        }
+        if (_objectToShrink == null)
+        {
+            return true;
+        }
+
+        return false;
+    }
 
     public Color SetSelection(GameObject selectedObject, GameObject objectAnchor)
     {
@@ -283,7 +303,7 @@ public class GameManager : Singleton<GameManager>
 
         }
 
-        if (_objectToEnlarge != null && _objectToShrink != null)
+        if (_objectToEnlarge != null && _objectToShrink != null && _isTutorialLevel)
         {
             ShowChangeSizeHelp();
         }

@@ -10,6 +10,7 @@ public class InteractWith : MonoBehaviour
     [SerializeField] protected Transform _interactPromptPosition;
     [SerializeField] protected Interaction[] _couplets;
     [SerializeField] protected bool _singleInteraction;
+    [SerializeField] protected AudioClip[] _searchAudioClip;
 
 
     protected GameObject _keyPrompt;
@@ -30,6 +31,9 @@ public class InteractWith : MonoBehaviour
         if (!_canInteract)
             return;
 
+        if (_keyPrompt == null)
+            return;
+
         if (GameManager.Instance.GetState() == GameStatesEnum.NARRATION)
         {
             _keyPrompt.SetActive(false);
@@ -44,9 +48,8 @@ public class InteractWith : MonoBehaviour
             _keyPrompt.transform.position = new Vector3(pos.x, newY, 0);
         }
 
-
-
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -99,19 +102,35 @@ public class InteractWith : MonoBehaviour
         {
             controller.UnsetInteractableObject();
         }
-        Destroy(_keyPrompt);
+        if (_keyPrompt != null)
+        {
+            Destroy(_keyPrompt);
+        }       
 
     }
 
     public virtual GameObject DoInteraction()
     {
+        PlayRandomAudioClip();
 
         StartCoroutine(GameManager.Instance.OpenDialogue(_couplets));
         if (_singleInteraction)
         {
             _alreadyInteracted = true;
+            Destroy(_keyPrompt);
         }
         return null;
+    }
+
+    protected void PlayRandomAudioClip()
+    {
+        if (_searchAudioClip != null && _searchAudioClip.Length > 0)
+        {
+            int index = Random.Range(0, _searchAudioClip.Length - 1);
+            AudioManager.Instance.PlayClip(_searchAudioClip[index]);
+        }
+
+
     }
 
 }

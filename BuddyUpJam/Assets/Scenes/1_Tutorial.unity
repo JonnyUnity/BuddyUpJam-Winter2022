@@ -1217,7 +1217,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.329, y: -0.289, z: -10}
+  m_LocalPosition: {x: -8.48, y: -1.91, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1647,7 +1647,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 667098565}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.329, y: -0.289, z: 0}
+  m_LocalPosition: {x: -8.48, y: -1.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 806396044}
@@ -1806,6 +1806,8 @@ MonoBehaviour:
   _canBePickedUp: 0
   _pickUpableSize: 0.5
   _couplets: []
+  _playCoupletsOnce: 0
+  _spriteCollider: {fileID: 0}
 --- !u!61 &668153244
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2125,10 +2127,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactPromptPrefab: {fileID: 7786749397279322767, guid: 5e6420599faec3f43b8de5e2cb6f249b, type: 3}
   _interactPromptPosition: {fileID: 1541843441}
-  _couplets:
-  - {fileID: 11400000, guid: 84a648fd54ed3f04c805d00c47b6a8ad, type: 2}
-  - {fileID: 11400000, guid: 29816fb7cde0b254d89f26f1201effe1, type: 2}
+  _couplets: []
   _singleInteraction: 1
+  _searchAudioClip: []
   _containedObject: {fileID: 1184714801}
 --- !u!61 &799542983
 BoxCollider2D:
@@ -2320,6 +2321,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 810807038}
   m_CullTransparentMesh: 1
+--- !u!1 &824080189
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 824080190}
+  m_Layer: 0
+  m_Name: PromptPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &824080190
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824080189}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 978653053}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &851599958
 GameObject:
   m_ObjectHideFlags: 0
@@ -2349,7 +2380,6 @@ Transform:
   m_Children:
   - {fileID: 2091149481}
   - {fileID: 668153241}
-  - {fileID: 1332025496}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2806,6 +2836,8 @@ GameObject:
   - component: {fileID: 978653053}
   - component: {fileID: 978653052}
   - component: {fileID: 978653051}
+  - component: {fileID: 978653054}
+  - component: {fileID: 978653055}
   m_Layer: 0
   m_Name: Tutorial_Wardrobe
   m_TagString: Untagged
@@ -2900,10 +2932,57 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.29, y: -4.24, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 824080190}
+  - {fileID: 1332025496}
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &978653054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978653050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97cdd34c336fa5f4982bfb428eb2cde1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactPromptPrefab: {fileID: 7786749397279322767, guid: 5e6420599faec3f43b8de5e2cb6f249b, type: 3}
+  _interactPromptPosition: {fileID: 824080190}
+  _couplets: []
+  _singleInteraction: 1
+  _searchAudioClip:
+  - {fileID: 8300000, guid: c6390fd4ccf9a154cacb8cbdad96f89b, type: 3}
+  _containedObject: {fileID: 1332025492}
+--- !u!61 &978653055
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978653050}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.007887602, y: 0.34705758}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 4, y: 4}
+    newSize: {x: 4, y: 4}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.5109649, y: 0.5925269}
+  m_EdgeRadius: 0
 --- !u!1 &981780254
 GameObject:
   m_ObjectHideFlags: 0
@@ -3052,6 +3131,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &985033927 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1513184205724507592, guid: 7b215fd0b8c965548b12d30edf763182, type: 3}
+  m_PrefabInstance: {fileID: 1513184207123559778}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 985033925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dfdb3cd5880071429a0874f01b388d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &996314998
 GameObject:
   m_ObjectHideFlags: 0
@@ -3518,6 +3608,7 @@ MonoBehaviour:
   _soundEffect: {fileID: 1056734988}
   _openCloseStoryBookClip: {fileID: 8300000, guid: a8c44076194a95741bab0c089501ce3c, type: 3}
   _useWandClip: {fileID: 8300000, guid: 058774d3e20646a478b9c19972ccb52d, type: 3}
+  _openDoorClip: {fileID: 8300000, guid: 5d3982995da5b3a4e9c85dd5dadf1ec9, type: 3}
   _shrinkEnlargeClip: {fileID: 8300000, guid: 7f443fbb49a061145a9916b4dbe8b97e, type: 3}
   _CatClip: {fileID: 8300000, guid: e41ebf65f619dd640ab2705bbcabcf1d, type: 3}
 --- !u!4 &1056734987
@@ -3847,6 +3938,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 15f241f033b1e9548976c24e3708a85c, type: 2}
   - {fileID: 11400000, guid: 2e2bc6667bbd01242abf0ec29a469eed, type: 2}
   _singleInteraction: 1
+  _searchAudioClip:
+  - {fileID: 8300000, guid: c6390fd4ccf9a154cacb8cbdad96f89b, type: 3}
 --- !u!61 &1069637351
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4835,7 +4928,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1310028940}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.31, y: 0.02, z: 0}
+  m_LocalPosition: {x: -8.64, y: -1.84, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1591522642}
@@ -4859,7 +4952,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &1332025493
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4959,12 +5052,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1332025492}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.61, y: 0.67, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 851599959}
-  m_RootOrder: 2
+  m_Father: {fileID: 978653053}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1349887381
 GameObject:
@@ -5101,7 +5194,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1437557572}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.329, y: -0.289, z: -10}
+  m_LocalPosition: {x: -8.48, y: -1.91, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1064862153}
@@ -5401,6 +5494,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _exitTrigger: {fileID: 498204799}
   _exitDoor: {fileID: 2091149480}
+  _doorInteraction: {fileID: 985033927}
 --- !u!114 &1591522644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7068,7 +7162,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2144105036
 Transform:
   m_ObjectHideFlags: 0
@@ -7389,7 +7483,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8228095929149168125, guid: 15597352ccdcd56428d1e4e79b4b9c5f, type: 3}
       propertyPath: _sceneName
-      value: 2_Hallway
+      value: 3_Library
       objectReference: {fileID: 0}
     - target: {fileID: 8228095929149168125, guid: 15597352ccdcd56428d1e4e79b4b9c5f, type: 3}
       propertyPath: _couplets.Array.size

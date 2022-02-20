@@ -11,6 +11,7 @@ public class AudioManager : Singleton<AudioManager>
 
     [SerializeField] private AudioClip _openCloseStoryBookClip;
     [SerializeField] private AudioClip _useWandClip;
+    [SerializeField] private AudioClip _openDoorClip;
     [SerializeField] private AudioClip _shrinkEnlargeClip;
     [SerializeField] private AudioClip _CatClip;
 
@@ -55,9 +56,19 @@ public class AudioManager : Singleton<AudioManager>
         _soundEffect.PlayOneShot(_shrinkEnlargeClip);
     }
 
+    public void PlayOpenDoorClip()
+    {
+        _soundEffect.PlayOneShot(_openDoorClip);
+    }
+
     public void PlayCatClip()
     {
         _soundEffect.PlayOneShot(_CatClip);
+    }
+
+    public void PlayClip(AudioClip clip)
+    {
+        _soundEffect.PlayOneShot(clip);
     }
 
 }

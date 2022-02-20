@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D _rigidBody;
     private Transform _transform;
-        
+
     [SerializeField] private GameObject _cursorObj;
     [SerializeField] private GameObject _cursorPivot;
     private Transform _cursorPivotTransform;
@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Interaction[] _firstMoveCouplets;
     [SerializeField] private Interaction[] _firstWandInHallwayCouplets;
     [SerializeField] private Interaction[] _firstStorybookCouplets;
-    
+
     private PlayerStatesEnum State;
 
     private UnityEvent<Vector2> onMoveEvent = new UnityEvent<Vector2>();
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
 
     public UnityEvent<Vector2> OnMoveEvent => onMoveEvent;
     public UnityEvent OnStopMovingEvent => onStopMovingEvent;
-    
+
     private void Awake()
     {
         _camera = Camera.main;
@@ -93,6 +93,31 @@ public class PlayerController : MonoBehaviour
             OnMoveEvent.Invoke(move);
         }
     }
+
+    //public void OnMoveLeft(InputValue value)
+    //{
+    //    Vector2 move = -Vector2.right;
+    //    OnMoveEvent.Invoke(move);
+
+    //}
+
+    //public void OnMoveRight(InputValue value)
+    //{
+    //    Vector2 move = Vector2.right;
+    //    OnMoveEvent.Invoke(move);
+    //}
+
+    //public void OnMoveUp(InputValue value)
+    //{
+    //    Vector2 move = Vector2.up;
+    //    OnMoveEvent.Invoke(move);
+    //}
+
+    //public void OnMoveDown(InputValue value)
+    //{
+    //    Vector2 move = -Vector2.up;
+    //    OnMoveEvent.Invoke(move);
+    //}
 
     #region State functions
 
@@ -146,6 +171,8 @@ public class PlayerController : MonoBehaviour
     {
         if (_highlightedObj == null)
             return;
+
+
 
         _wandAnimator.SetTrigger("UseWand");
 
@@ -202,12 +229,6 @@ public class PlayerController : MonoBehaviour
     {
         if (State == PlayerStatesEnum.NARRATION)
         {
-            //bool moreDialogue = GameManager.Instance.NextDialogue();
-            //if (!moreDialogue)
-            //{
-            //    State = PlayerStatesEnum.IDLE;
-            //}
-
             return;
         }
 
@@ -323,13 +344,32 @@ public class PlayerController : MonoBehaviour
     public void StopMoving()
     {
         _movementDirection = Vector2.zero;
+
+        // return sprite to facing camera
+
     }
+
 
     private void FixedUpdate()
     {
-        Vector2 movement = _movementDirection * _moveSpeed * Time.deltaTime;
+
+        if (_movementDirection == Vector2.zero)
+            return;
+
+        Vector2 movement = Vector2.zero;
+        if (_movementDirection.x != 0)
+        {
+            movement.x = _movementDirection.x;
+        }
+        else if (_movementDirection.y != 0)
+        {
+            movement.y = _movementDirection.y;
+        }
+
+        movement = _moveSpeed * Time.deltaTime * movement.normalized;
         _rigidBody.MovePosition(_rigidBody.position + movement);
     }
+
 
     public void OnSwapSize()
     {

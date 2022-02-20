@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8c6e9a9beacb14fbb4f213aa0a87ef, type: 3}
   m_Name: 1.7.2 Wand
   m_EditorClassIdentifier: 
-  FirstLine: Point it at an object and a simple click
+  FirstLine: Point it at an object and simply click
   SecondLine: Will make that object enlarge or shrink
   AudioClip: {fileID: 8300000, guid: 8d064c94dfaaa0a4296bac62c8eb542b, type: 3}

@@ -15,7 +15,7 @@ public class SelectObject : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("CanChangeSize"))
+        if (collision.CompareTag("CanChangeSize") && GameManager.Instance.CanSelect())
         {
             Debug.Log("hovering over selectable object " + collision.gameObject.name);
             _renderer = collision.gameObject.GetComponent<Renderer>();

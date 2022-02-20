@@ -10,6 +10,10 @@ public class PickUp : MonoBehaviour
     [SerializeField] private bool _canBePickedUp = true;
     [SerializeField] private float _pickUpableSize = 0.5f;
     [SerializeField] private Interaction[] _couplets;
+    [SerializeField] private bool _playCoupletsOnce;
+    [SerializeField] private Collider2D _spriteCollider;
+
+    private bool _coupletsPlayed;
 
     private GameObject _keyPrompt;
     private Transform _transform;
@@ -70,15 +74,30 @@ public class PickUp : MonoBehaviour
     public void PickUpObject()
     {
         // change sorting layer...
-        //yield return StartCoroutine(GameManager.Instance.OpenDialogue(_couplets));
-
-        StartCoroutine(GameManager.Instance.OpenDialogue(_couplets));
-
+        if (_spriteCollider != null)
+        {
+            _spriteCollider.enabled = false;
+        }        
+        
+        if (!_playCoupletsOnce)
+        {
+            StartCoroutine(GameManager.Instance.OpenDialogue(_couplets));
+        }
+        else if (_playCoupletsOnce && !_coupletsPlayed)
+        {
+            StartCoroutine(GameManager.Instance.OpenDialogue(_couplets));
+            _coupletsPlayed = true;
+        }
     }
+
 
     public void DropObject()
     {
         // reset sorting layer...
+        if (_spriteCollider != null)
+        {
+            _spriteCollider.enabled = true;
+        }        
 
         gameObject.transform.parent = _parent;
         _interactSpriteTransform = _transform.position + new Vector3(0, 1f, 0);

@@ -5,12 +5,12 @@ using UnityEngine;
 public class DropObject : MonoBehaviour
 {
 
-    [SerializeField] private Transform _dropPosition;
-    [SerializeField] private GameObject _interactPromptPrefab;
-    [SerializeField] private bool _showDroppedObject;
-    [SerializeField] private float _droppableSize = 1f;
-    [SerializeField] private bool _canBeDroppedTo;
-    [SerializeField] private Interaction[] _couplets;
+    [SerializeField] protected Transform _dropPosition;
+    [SerializeField] protected GameObject _interactPromptPrefab;
+    [SerializeField] protected bool _showDroppedObject;
+    [SerializeField] protected float _droppableSize = 1f;
+    [SerializeField] protected bool _canBeDroppedTo;
+    [SerializeField] protected Interaction[] _couplets;
 
     private GameObject _keyPrompt;
     private GameObject _placedObject;
@@ -49,7 +49,7 @@ public class DropObject : MonoBehaviour
             var playerObj = collision.gameObject;
             if (playerObj.TryGetComponent(out PlayerController controller))
             {
-                if (controller.IsHoldingObject() && _canBeDroppedTo)
+                if (controller.IsHoldingObject() && _canBeDroppedTo && _placedObject == null)
                 {
                     _canInteract = true;
                     _keyPrompt = Instantiate(_interactPromptPrefab, _interactSpriteTransform, Quaternion.identity);
@@ -75,7 +75,7 @@ public class DropObject : MonoBehaviour
             var playerObj = collision.gameObject;
             if (playerObj.TryGetComponent(out PlayerController controller))
             {
-                if (controller.IsHoldingObject() && _canBeDroppedTo)
+                if (controller.IsHoldingObject() && _canBeDroppedTo && _placedObject == null)
                 {
                     _canInteract = true;
                     if (_keyPrompt == null)
@@ -108,7 +108,7 @@ public class DropObject : MonoBehaviour
         }
     }
 
-    public void DoDrop(GameObject objectBeingDropped)
+    public virtual void DoDrop(GameObject objectBeingDropped)
     {
         objectBeingDropped.transform.parent = null;
 
