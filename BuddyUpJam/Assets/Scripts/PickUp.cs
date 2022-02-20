@@ -73,19 +73,21 @@ public class PickUp : MonoBehaviour
         }
     }
 
-    public void PickUpObject()
+    public bool PickUpObject()
     {
         // change sorting layer...
         if (_spriteCollider != null)
         {
             _spriteCollider.enabled = false;
-        }        
-        
+        }
+
         if (_containerObject != null)
         {
             _containerObject.DoPickup();
             _containerObject = null;
         }
+
+        Debug.Log("PickupObject " + _playCoupletsOnce + " " + _coupletsPlayed);
 
         if (!_playCoupletsOnce)
         {
@@ -96,6 +98,14 @@ public class PickUp : MonoBehaviour
             StartCoroutine(GameManager.Instance.OpenDialogue(_couplets));
             _coupletsPlayed = true;
         }
+        else
+        {
+            return true;
+        }
+
+        return false;
+        
+
     }
 
 

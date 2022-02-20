@@ -14,7 +14,7 @@ public class SettingsHandler : MonoBehaviour
     private void Start()
     {
         
-        _audioMixer.GetFloat("MasterVolume", out float volume);
+        _audioMixer.GetFloat("MusicVolume", out float volume);
         _musicSlider.value = volume;
         _audioMixer.GetFloat("EffectsVolume", out volume);
         _effectSlider.value = volume;
@@ -23,7 +23,7 @@ public class SettingsHandler : MonoBehaviour
 
     public void SetMusicVolume(float volume)
     {
-        _audioMixer.SetFloat("MasterVolume", volume);
+        _audioMixer.SetFloat("MusicVolume", volume);
     }
 
     public void SetEffectsVolume(float volume)

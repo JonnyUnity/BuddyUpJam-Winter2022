@@ -50,7 +50,13 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private Interaction[] _pickUpStorybookCouplets;
     [SerializeField] private Interaction[] _pickUpWandCouplets;
 
+    [SerializeField] private Interaction[] _useWandInHallwayCouplets;
+    [SerializeField] private Interaction[] _useStorybookInHallwayCouplets;
+
     private bool _isTutorialLevel = true;
+    private int _sceneIndex;
+    private bool _usedWandInHallway;
+    private bool _usedStorybookInHallway;
 
     private GameStatesEnum State;
 
@@ -77,10 +83,12 @@ public class GameManager : Singleton<GameManager>
 
     private void LoadLevel(Scene scene, LoadSceneMode mode)
     {
-        if (scene.buildIndex == 0)
+        _sceneIndex = scene.buildIndex;
+
+        if (_sceneIndex == 0)
             return;
 
-        if (scene.buildIndex > 1)
+        if (_sceneIndex > 1)
         {
             _isTutorialLevel = false;
         }
@@ -207,6 +215,8 @@ public class GameManager : Singleton<GameManager>
         }
         else
         {
+            GameManager.Instance.CheckFirstUseInSecondLevel(2); // wand
+
             int storyBookIndex = SceneManager.GetActiveScene().buildIndex - 1;
             _storyBookImage.sprite = _storyBookPages[storyBookIndex];
 
@@ -219,6 +229,24 @@ public class GameManager : Singleton<GameManager>
     }
 
     #endregion
+
+    public void CheckFirstUseInSecondLevel(int item)
+    {
+        if (_sceneIndex != 2)
+            return;
+
+        if (item == 1 && !_usedWandInHallway) //wand
+        {
+            StartCoroutine(OpenDialogue(_useWandInHallwayCouplets));
+            _usedWandInHallway = true;
+        }
+        else if (item == 2 && !_usedStorybookInHallway) // storybook
+        {
+            StartCoroutine(OpenDialogue(_useStorybookInHallwayCouplets));
+            _usedStorybookInHallway = true;
+        }
+
+    }
 
     #region Pause Menu
 

@@ -13,6 +13,7 @@ public class LibraryHandler : MonoBehaviour
     [SerializeField] private GameObject _desiredPotPosition;
 
     [SerializeField] private GameObject _potDropInObject;
+    private FussyDropObject _potContainer;
 
     [SerializeField] private GameObject _featherObject;
     [SerializeField] private GameObject _flowerObject;
@@ -43,6 +44,7 @@ public class LibraryHandler : MonoBehaviour
         _globeTransform = _globeObject.transform;
         _potTransform = _potObject.transform;
         _featherTransform = _featherObject.transform;
+        _potContainer = _potDropInObject.GetComponent<FussyDropObject>();
 
         // Check every second if puzzle has been solved and player can proceed
         InvokeRepeating(nameof(CheckRoomSolved), 1, 1);
@@ -100,8 +102,8 @@ public class LibraryHandler : MonoBehaviour
 
     private bool IsPotionBrewed()
     {
-
-        return (!_featherObject.activeInHierarchy && !_flowerObject.activeInHierarchy);
+        return (_potContainer.DroppedObjectCount == 2); // feather and flower
+        //return (!_featherObject.activeInHierarchy && !_flowerObject.activeInHierarchy);
     }
 
     private bool IsPotCorrect()

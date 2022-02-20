@@ -333,6 +333,7 @@ MonoBehaviour:
   _couplets:
   - {fileID: 11400000, guid: 809038e8bfda322489cb594ced1806ee, type: 2}
   _singleInteraction: 0
+  _searchAudioClip: []
 --- !u!61 &103673327
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -462,6 +463,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a219a017d912e114889154471f9dae03, type: 2}
   - {fileID: 11400000, guid: aa279f33fcd53a2468a7fe4210054db0, type: 2}
   _singleInteraction: 0
+  _searchAudioClip: []
 --- !u!61 &112292490
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -972,6 +974,7 @@ MonoBehaviour:
   - {fileID: 1207011539}
   - {fileID: 672400463}
   - {fileID: 1494116082}
+  _doorInteraction: {fileID: 112292489}
 --- !u!114 &451208608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1037,6 +1040,7 @@ MonoBehaviour:
   _couplets:
   - {fileID: 11400000, guid: 4cbd6b1bc7761a54490ea81ce73d7f75, type: 2}
   _singleInteraction: 0
+  _searchAudioClip: []
 --- !u!61 &465967957
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1447,6 +1451,7 @@ MonoBehaviour:
   _couplets:
   - {fileID: 11400000, guid: 7a2683b37e38bb947990d7a302e36e04, type: 2}
   _singleInteraction: 0
+  _searchAudioClip: []
 --- !u!61 &835717437
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1717,6 +1722,7 @@ MonoBehaviour:
   _couplets:
   - {fileID: 11400000, guid: ca95bdd82e9bf13428c4a78eb5491065, type: 2}
   _singleInteraction: 0
+  _searchAudioClip: []
 --- !u!61 &1338337504
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2070,6 +2076,7 @@ MonoBehaviour:
   _couplets:
   - {fileID: 11400000, guid: 767f67a59faf7b44aa8a5580e2ad351e, type: 2}
   _singleInteraction: 0
+  _searchAudioClip: []
 --- !u!61 &1594913679
 BoxCollider2D:
   m_ObjectHideFlags: 0

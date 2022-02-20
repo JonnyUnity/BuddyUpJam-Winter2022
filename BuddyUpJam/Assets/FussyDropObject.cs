@@ -5,14 +5,17 @@ using UnityEngine;
 public class FussyDropObject : DropObject
 {
 
-    [SerializeField] List<GameObject> _acceptedItems;
+    [SerializeField] private List<GameObject> _acceptedItems;
+    public int DroppedObjectCount { get; private set; }
 
     public override void DoDrop(GameObject objectBeingDropped)
     {
 
         if (_acceptedItems.Contains(objectBeingDropped))
         {
+            DroppedObjectCount++;
             base.DoDrop(objectBeingDropped);
+            
         }        
     }
 

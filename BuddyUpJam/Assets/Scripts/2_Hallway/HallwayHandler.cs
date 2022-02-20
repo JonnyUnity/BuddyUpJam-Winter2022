@@ -8,6 +8,7 @@ public class HallwayHandler : MonoBehaviour
 
     [SerializeField] private GameObject _exitTrigger;
     [SerializeField] private List<ShrinkEnlarge> _paintings;
+    [SerializeField] private InteractWith _doorInteraction;
 
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class HallwayHandler : MonoBehaviour
 
         if (IsRoomSolved())
         {
+            Destroy(_doorInteraction);
             _exitTrigger.SetActive(true);
         }
     }

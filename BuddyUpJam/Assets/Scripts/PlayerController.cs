@@ -173,6 +173,7 @@ public class PlayerController : MonoBehaviour
 
 
         _wandAnimator.SetTrigger("UseWand");
+        GameManager.Instance.CheckFirstUseInSecondLevel(1); // wand
 
         var newColor = GameManager.Instance.SetSelection(_highlightedObj, _highlightedAnchor);
 
@@ -184,6 +185,7 @@ public class PlayerController : MonoBehaviour
         AudioManager.Instance.PlayUseWandClip();
 
     }
+
 
     public void SetInteractableObject(InteractWith interactObject)
     {
@@ -256,27 +258,6 @@ public class PlayerController : MonoBehaviour
                 _pickUpObj = _interactObj.DoInteraction();
             }
 
-                //if (State == PlayerStatesEnum.INTERACTING)
-                //{
-                //    bool moreDialogue = GameManager.Instance.NextDialogue();
-                //    if (!moreDialogue)
-                //    {
-                //        State = PlayerStatesEnum.IDLE;
-                //    }
-                //}
-                //else
-                //{
-
-                //if (interactionActive)
-                //{
-                //    State = PlayerStatesEnum.INTERACTING;
-                //}
-                //else
-                //{
-                //    State = PlayerStatesEnum.IDLE;
-                //}
-                //}
-
             if (_pickUpObj != null)
             {
                 Debug.Log("Picking up!");
@@ -301,8 +282,13 @@ public class PlayerController : MonoBehaviour
                 {
                     if (_pickUpObj.TryGetComponent(out PickUp pickup))
                     {
-                        pickup.PickUpObject();
+                        bool noDialogue = pickup.PickUpObject();
+                        if (noDialogue) // else the dialogue handler will set the player state back - MESSY URG!
+                        {
+                            State = PlayerStatesEnum.IDLE;
+                        }
                     }
+                                        
                     _heldObject = _pickUpObj;
                     _heldObject.SetActive(true);
                     _heldObject.transform.parent = _heldObjectPosition.transform;
