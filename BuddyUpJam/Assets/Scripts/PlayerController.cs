@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
 {
 
     private Camera _camera;
+    private bool _facingRight = true;
+    private SpriteRenderer _spriteRenderer;
 
     private GameObject _highlightedObj;
     private GameObject _highlightedAnchor;
@@ -33,6 +35,9 @@ public class PlayerController : MonoBehaviour
     private GameObject _pickUpObj;
     private GameObject _heldObject;
     [SerializeField] private GameObject _heldObjectPosition;
+    private Transform _heldObjectTransform;
+    private Vector3 _heldObjectOffset = new Vector3(0.35f, -0.7f, 0);
+    private Vector3 _heldObjectOffsetRight = new Vector3(-0.35f, -0.7f, 0);
 
     private bool _isFirstMove = true;
     [SerializeField] private Interaction[] _firstMoveCouplets;
@@ -44,7 +49,8 @@ public class PlayerController : MonoBehaviour
     private UnityEvent<Vector2> onMoveEvent = new UnityEvent<Vector2>();
     private UnityEvent onStopMovingEvent = new UnityEvent();
 
-    public Animator _wandAnimator;
+    [SerializeField] private Animator _animator;
+    [SerializeField] private Animator _wandAnimator;
 
     public UnityEvent<Vector2> OnMoveEvent => onMoveEvent;
     public UnityEvent OnStopMovingEvent => onStopMovingEvent;
@@ -54,8 +60,10 @@ public class PlayerController : MonoBehaviour
         _camera = Camera.main;
         _transform = transform;
         _rigidBody = GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
 
         _cursorPivotTransform = _cursorPivot.transform;
+        _heldObjectTransform = _heldObjectPosition.transform;
 
         State = PlayerStatesEnum.IDLE;
 
@@ -88,41 +96,29 @@ public class PlayerController : MonoBehaviour
         else
         {
             Vector2 move = value.Get<Vector2>().normalized;
+            if (move.x > 0)
+            {
+                _spriteRenderer.flipX = false;
+                //_heldObjectPosition.transform.position = _heldObjectOffset;
+                _heldObjectTransform.localPosition = _heldObjectOffset;
+            }
+            else if (move.x < 0)
+            {
+                _spriteRenderer.flipX = true;
+                //_heldObjectPosition.transform.position = _heldObjectOffsetRight;
+                _heldObjectTransform.localPosition = _heldObjectOffsetRight;
+            }
+
             OnMoveEvent.Invoke(move);
         }
     }
-
-    //public void OnMoveLeft(InputValue value)
-    //{
-    //    Vector2 move = -Vector2.right;
-    //    OnMoveEvent.Invoke(move);
-
-    //}
-
-    //public void OnMoveRight(InputValue value)
-    //{
-    //    Vector2 move = Vector2.right;
-    //    OnMoveEvent.Invoke(move);
-    //}
-
-    //public void OnMoveUp(InputValue value)
-    //{
-    //    Vector2 move = Vector2.up;
-    //    OnMoveEvent.Invoke(move);
-    //}
-
-    //public void OnMoveDown(InputValue value)
-    //{
-    //    Vector2 move = -Vector2.up;
-    //    OnMoveEvent.Invoke(move);
-    //}
 
     #region State functions
 
     public void ChangeState(PlayerStatesEnum newState)
     {
         State = newState;
-        _movementDirection = Vector2.zero;
+        StopMoving();
     }
 
     public bool IsResizing()
@@ -148,9 +144,9 @@ public class PlayerController : MonoBehaviour
             newAim = (worldPos - (Vector2)_cursorPivotTransform.position).normalized;
             Vector2 cursorVector = newAim;
 
-            if (distanceToCursor < 1f * 1f)
+            if (distanceToCursor < 1.5f * 1.5f)
             {
-                cursorVector *= 1f;
+                cursorVector *= 1.5f;
                 _cursorTransform.position = (Vector2)_cursorPivotTransform.position + cursorVector;
             }
             else if (distanceToCursor > 3f * 3f)
@@ -232,6 +228,8 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
+
+        _animator.SetBool("IsMoving", false);
 
         if (_heldObject != null)
         {
@@ -321,14 +319,26 @@ public class PlayerController : MonoBehaviour
 
     public void Move(Vector2 direction)
     {
+
+        if (direction == Vector2.zero)
+        {
+            _animator.SetBool("IsMoving", false);
+            AudioManager.Instance.PauseWalkingAudio();
+        }
+        else
+        {
+            _animator.SetBool("IsMoving", true);
+            AudioManager.Instance.PlayWalkingAudio();
+        }
+        
         _movementDirection = direction;
     }
 
     public void StopMoving()
     {
+        _animator.SetBool("IsMoving", false);
+        AudioManager.Instance.PauseWalkingAudio();
         _movementDirection = Vector2.zero;
-
-        // return sprite to facing camera
 
     }
 

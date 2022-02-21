@@ -14,6 +14,10 @@ public class ExitRoomTrigger : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            var playerObj = collision.gameObject;
+            PlayerController player = playerObj.GetComponent<PlayerController>();
+            player.StopMoving();
+
             if (!_isFinalLevel)
             {
                 AudioManager.Instance.PlayOpenDoorClip();

@@ -11,6 +11,8 @@ public class PickUp : MonoBehaviour
     [SerializeField] private float _pickUpableSize = 0.5f;
     [SerializeField] private Interaction[] _couplets;
     [SerializeField] private bool _playCoupletsOnce;
+
+    [SerializeField] private SpriteRenderer _renderer;
     [SerializeField] private Collider2D _spriteCollider;
 
     private bool _coupletsPlayed;
@@ -79,6 +81,8 @@ public class PickUp : MonoBehaviour
     public bool PickUpObject()
     {
         // change sorting layer...
+        _renderer.sortingOrder = 1;
+
         if (_spriteCollider != null)
         {
             _spriteCollider.enabled = false;
@@ -115,6 +119,8 @@ public class PickUp : MonoBehaviour
     public void DropObject(DropObject containerObject)
     {
         // reset sorting layer...
+        _renderer.sortingOrder = 0;
+
         if (_spriteCollider != null)
         {
             _spriteCollider.enabled = true;

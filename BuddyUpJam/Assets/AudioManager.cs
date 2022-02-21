@@ -7,13 +7,14 @@ public class AudioManager : Singleton<AudioManager>
 {
 
     [SerializeField] private AudioSource[] _versionThemes;
+    [SerializeField] private AudioSource _walkingAudio;
     [SerializeField] private AudioSource _soundEffect;
 
     [SerializeField] private AudioClip _openCloseStoryBookClip;
     [SerializeField] private AudioClip _useWandClip;
     [SerializeField] private AudioClip _openDoorClip;
     [SerializeField] private AudioClip _shrinkEnlargeClip;
-    [SerializeField] private AudioClip _CatClip;
+    [SerializeField] private AudioClip _unlockDoorClip;
 
     private bool IsPlaying;
 
@@ -29,8 +30,9 @@ public class AudioManager : Singleton<AudioManager>
         _versionThemes[version].mute = false;
 
         if (!IsPlaying)
-        {
-            _versionThemes.ForEach(f => f.Play());
+        { 
+            //_versionThemes.ForEach(f => f.Play());
+            _versionThemes.ForEach(f => f.FadeIn(2));
             IsPlaying = true;
         }
 
@@ -40,6 +42,21 @@ public class AudioManager : Singleton<AudioManager>
     {
         _versionThemes.ForEach(f => f.FadeOut(1f));
     }
+
+    public void PlayWalkingAudio()
+    {
+        _walkingAudio.Play();
+
+    }
+
+    public void PauseWalkingAudio()
+    {
+        if (_walkingAudio.isPlaying)
+        {
+            _walkingAudio.Stop();
+        }
+    }
+
 
     public void PlayStorybookOpenCloseClip()
     {
@@ -61,9 +78,9 @@ public class AudioManager : Singleton<AudioManager>
         _soundEffect.PlayOneShot(_openDoorClip);
     }
 
-    public void PlayCatClip()
+    public void PlayUnlockDoorClip()
     {
-        _soundEffect.PlayOneShot(_CatClip);
+        _soundEffect.PlayOneShot(_unlockDoorClip);
     }
 
     public void PlayClip(AudioClip clip)

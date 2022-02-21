@@ -115,6 +115,7 @@ public class DropObject : MonoBehaviour
         if (_showDroppedObject)
         {
             objectBeingDropped.transform.position = _dropPosition.position;
+            objectBeingDropped.transform.parent = _dropPosition;
             _placedObject = objectBeingDropped;
             PickUp pickup = _placedObject.GetComponent<PickUp>();
             pickup.DropObject(this);

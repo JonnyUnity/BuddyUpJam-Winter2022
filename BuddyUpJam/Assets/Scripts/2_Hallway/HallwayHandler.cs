@@ -9,6 +9,7 @@ public class HallwayHandler : MonoBehaviour
     [SerializeField] private GameObject _exitTrigger;
     [SerializeField] private List<ShrinkEnlarge> _paintings;
     [SerializeField] private InteractWith _doorInteraction;
+    private bool _bellPlayed;
 
     private void Awake()
     {
@@ -26,6 +27,12 @@ public class HallwayHandler : MonoBehaviour
         if (IsRoomSolved())
         {
             Destroy(_doorInteraction);
+            if (!_bellPlayed)
+            {
+                AudioManager.Instance.PlayUnlockDoorClip();
+                _bellPlayed = true;
+            }
+            
             _exitTrigger.SetActive(true);
         }
     }

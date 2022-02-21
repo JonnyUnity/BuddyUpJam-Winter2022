@@ -195,7 +195,7 @@ SpriteRenderer:
   m_SortingLayerID: -1661898547
   m_SortingLayer: 3
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: ab92f27e998d8ec4192cd426beeec985, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 296e59757d19cd6498f70bbfbbe48bd1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -223,6 +223,9 @@ MonoBehaviour:
   _canBePickedUp: 1
   _pickUpableSize: 0.5
   _couplets: []
+  _playCoupletsOnce: 0
+  _renderer: {fileID: 71888350}
+  _spriteCollider: {fileID: 0}
 --- !u!1 &89375574
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,6 +410,7 @@ MonoBehaviour:
   _couplets:
   - {fileID: 11400000, guid: 9bee02429fce7b54fa5707f529d306f1, type: 2}
   _singleInteraction: 0
+  _searchAudioClip: []
 --- !u!61 &112292490
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -963,6 +967,7 @@ MonoBehaviour:
   _couplets:
   - {fileID: 11400000, guid: f320544490d0086469726107cdf48c5b, type: 2}
   _singleInteraction: 0
+  _searchAudioClip: []
   _containedObject: {fileID: 71888348}
 --- !u!212 &1540885923
 SpriteRenderer:

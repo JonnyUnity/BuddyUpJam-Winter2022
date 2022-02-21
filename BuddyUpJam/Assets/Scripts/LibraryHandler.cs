@@ -32,6 +32,8 @@ public class LibraryHandler : MonoBehaviour
     private bool _isPotionBrewed;
     private bool _potionBrewedNarrationDone;
 
+    private bool _bellPlayed;
+
     private void Awake()
     {
         AudioManager.Instance.PlayVersionTrack(2);
@@ -94,6 +96,12 @@ public class LibraryHandler : MonoBehaviour
         if (IsRoomSolved())
         {
 
+            if (!_bellPlayed)
+            {
+                AudioManager.Instance.PlayUnlockDoorClip();
+                _bellPlayed = true;
+            }
+            
             Debug.Log("Room solved!");
             _exitTrigger.SetActive(true);
 

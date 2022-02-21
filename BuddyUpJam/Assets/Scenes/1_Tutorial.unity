@@ -1247,7 +1247,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.48, y: -1.91, z: -10}
+  m_LocalPosition: {x: -4.48, y: -0.66, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1590,6 +1590,7 @@ GameObject:
   - component: {fileID: 667098570}
   - component: {fileID: 667098571}
   - component: {fileID: 667098569}
+  - component: {fileID: 667098572}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1658,7 +1659,7 @@ SpriteRenderer:
   m_SortingLayerID: -1661898547
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 83e8ac92980ad9c40aae6d39348b86e9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: aba006e7724bea541920fe6b11b7b508, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1677,8 +1678,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 667098565}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.48, y: -1.91, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -4.48, y: -0.66, z: 0}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.58894}
   m_Children:
   - {fileID: 806396044}
   - {fileID: 2144105036}
@@ -1700,18 +1701,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.15}
+  m_Offset: {x: 0.06349105, y: -1.2205276}
   m_SpriteTilingProperty:
-    border: {x: 0.140625, y: 0.078125, z: 0.140625, w: 0.078125}
-    pivot: {x: 0.5, y: 0.078}
-    oldSize: {x: 1, y: 1}
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 4, y: 4}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.3}
+  m_Size: {x: 1.0351378, y: 0.73723793}
   m_EdgeRadius: 0
 --- !u!114 &667098570
 MonoBehaviour:
@@ -1738,6 +1739,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7df9095abc1d278478752a8816a06cf8, type: 2}
   - {fileID: 11400000, guid: 9efb1ea100ef5bd4b8da63d2bf471b10, type: 2}
   - {fileID: 11400000, guid: 63bf579a9e9f08a4294af7853b205a08, type: 2}
+  _animator: {fileID: 667098572}
   _wandAnimator: {fileID: 2144105040}
 --- !u!114 &667098571
 MonoBehaviour:
@@ -1769,6 +1771,25 @@ MonoBehaviour:
   m_DefaultActionMap: Esther
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!95 &667098572
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 667098565}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a3f8fbae82844aa48989e5e153210ecc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &668153240
 GameObject:
   m_ObjectHideFlags: 0
@@ -1837,6 +1858,7 @@ MonoBehaviour:
   _pickUpableSize: 0.5
   _couplets: []
   _playCoupletsOnce: 0
+  _renderer: {fileID: 0}
   _spriteCollider: {fileID: 0}
 --- !u!61 &668153244
 BoxCollider2D:
@@ -2024,7 +2046,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 754412084}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.251, y: 0.189, z: 0}
+  m_LocalPosition: {x: 0.35, y: -0.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 667098568}
@@ -2472,7 +2494,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Line 2
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 82345252637bdc24996f482197b69641, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2536,7 +2558,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 2.2562256, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &859464634
@@ -3256,7 +3278,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2013337706}
   m_Direction: 0
   m_MinValue: -60
-  m_MaxValue: 0
+  m_MaxValue: -5
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -3324,6 +3346,7 @@ GameObject:
   - component: {fileID: 1056734984}
   - component: {fileID: 1056734983}
   - component: {fileID: 1056734988}
+  - component: {fileID: 1056734989}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -3635,12 +3658,13 @@ MonoBehaviour:
   - {fileID: 1056734985}
   - {fileID: 1056734984}
   - {fileID: 1056734983}
+  _walkingAudio: {fileID: 1056734989}
   _soundEffect: {fileID: 1056734988}
   _openCloseStoryBookClip: {fileID: 8300000, guid: a8c44076194a95741bab0c089501ce3c, type: 3}
   _useWandClip: {fileID: 8300000, guid: 058774d3e20646a478b9c19972ccb52d, type: 3}
   _openDoorClip: {fileID: 8300000, guid: 5d3982995da5b3a4e9c85dd5dadf1ec9, type: 3}
   _shrinkEnlargeClip: {fileID: 8300000, guid: 7f443fbb49a061145a9916b4dbe8b97e, type: 3}
-  _CatClip: {fileID: 8300000, guid: e41ebf65f619dd640ab2705bbcabcf1d, type: 3}
+  _unlockDoorClip: {fileID: 8300000, guid: f4ddc72dc18ae3e4bbd031f6ebe8c909, type: 3}
 --- !u!4 &1056734987
 Transform:
   m_ObjectHideFlags: 0
@@ -3670,6 +3694,102 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!82 &1056734989
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056734982}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 6056383645237889108, guid: 73c45ea6d238c0c43a76287146c64153, type: 2}
+  m_audioClip: {fileID: 8300000, guid: e87bf652f67677b429f8c1b28e7df06b, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -5302,7 +5422,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1437557572}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.48, y: -1.91, z: -10}
+  m_LocalPosition: {x: -4.48, y: -0.66, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1064862153}
@@ -6832,7 +6952,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.56078434}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.78431374}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7071,7 +7191,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Line 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 82345252637bdc24996f482197b69641, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -7135,7 +7255,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &2110995962
@@ -7410,11 +7530,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1513184205724507595, guid: 7b215fd0b8c965548b12d30edf763182, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 1513184205724507595, guid: 7b215fd0b8c965548b12d30edf763182, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 1513184205724507595, guid: 7b215fd0b8c965548b12d30edf763182, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7544,7 +7664,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8228095929149168125, guid: 15597352ccdcd56428d1e4e79b4b9c5f, type: 3}
       propertyPath: _sceneName
-      value: 3_Library
+      value: 2_Hallway
       objectReference: {fileID: 0}
     - target: {fileID: 8228095929149168125, guid: 15597352ccdcd56428d1e4e79b4b9c5f, type: 3}
       propertyPath: _couplets.Array.size

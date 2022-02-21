@@ -12,6 +12,7 @@ public class TutorialRoomHandler : MonoBehaviour
     [SerializeField] private GameObject _exitTrigger;
     [SerializeField] private ShrinkEnlarge _exitDoor;
     [SerializeField] private InteractWith _doorInteraction;
+    private bool _bellPlayed;
     
     private void Start()
     {
@@ -25,6 +26,12 @@ public class TutorialRoomHandler : MonoBehaviour
         {
 
             Destroy(_doorInteraction);
+
+            if (!_bellPlayed)
+            {
+                AudioManager.Instance.PlayUnlockDoorClip();
+                _bellPlayed = true;
+            }            
 
             Debug.Log("Room solved!");
 
