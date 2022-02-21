@@ -138,12 +138,18 @@ public class GameManager : Singleton<GameManager>
         Destroy(_playerObj);
         Destroy(_camera.gameObject);
         Destroy(_vcam.gameObject);
-        Destroy(_canvas);
+        //Destroy(_canvas);
         Destroy(_eventSystem);
         Destroy(_audioManager);
+//        Destroy(gameObject);
+
+
+    }
+
+    public void EndGameToMainMenu()
+    {
+        Destroy(_canvas);
         Destroy(gameObject);
-
-
     }
 
     public void LoadScene(string sceneName)
@@ -186,19 +192,24 @@ public class GameManager : Singleton<GameManager>
 
     #region Storybook
 
-    public IEnumerator PickupStoryBook()
+    public void PickupStoryBook()
     {
 
         _storyBookButton.SetActive(true);
         State = GameStatesEnum.NARRATION;
 
-        Debug.Log("Start narration");
-        yield return StartCoroutine(OpenDialogue(_pickUpStorybookCouplets));
-        //_dialogueHandler.ShowCouplets(_pickUpStorybookCouplets);
-        Debug.Log("narration over");
+        //Debug.Log("Start narration");
+        //yield return StartCoroutine(OpenDialogue(_pickUpStorybookCouplets));
+        ////_dialogueHandler.ShowCouplets(_pickUpStorybookCouplets);
+        //Debug.Log("narration over");
 
         _wandItem.SetCanBePickedUp(true);
 
+    }
+
+    public void HideStoryBook()
+    {
+        _storyBookButton.SetActive(false);
     }
 
     public void OpenStoryBook()
@@ -215,7 +226,7 @@ public class GameManager : Singleton<GameManager>
         }
         else
         {
-            GameManager.Instance.CheckFirstUseInSecondLevel(2); // wand
+            CheckFirstUseInSecondLevel(2); // storybook
 
             int storyBookIndex = SceneManager.GetActiveScene().buildIndex - 1;
             _storyBookImage.sprite = _storyBookPages[storyBookIndex];
@@ -463,14 +474,21 @@ public class GameManager : Singleton<GameManager>
 
     public IEnumerator OpenDialogue(Interaction[] couplets)
     {
-        _playerController.ChangeState(PlayerStatesEnum.NARRATION);
+        if (_playerController != null)
+        {
+            _playerController.ChangeState(PlayerStatesEnum.NARRATION);
+        }
+        
         State = GameStatesEnum.NARRATION;
 
         _dialogueHandler.NarrationPlaying = true;
         yield return _dialogueHandler.ShowCouplets(couplets);
 
         State = GameStatesEnum.PLAYING;
-        _playerController.ChangeState(PlayerStatesEnum.IDLE);
+        if (_playerController != null)
+        {
+            _playerController.ChangeState(PlayerStatesEnum.IDLE);
+        }        
 
     }
 

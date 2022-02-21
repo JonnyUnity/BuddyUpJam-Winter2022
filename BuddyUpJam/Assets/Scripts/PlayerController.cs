@@ -99,13 +99,11 @@ public class PlayerController : MonoBehaviour
             if (move.x > 0)
             {
                 _spriteRenderer.flipX = false;
-                //_heldObjectPosition.transform.position = _heldObjectOffset;
                 _heldObjectTransform.localPosition = _heldObjectOffset;
             }
             else if (move.x < 0)
             {
                 _spriteRenderer.flipX = true;
-                //_heldObjectPosition.transform.position = _heldObjectOffsetRight;
                 _heldObjectTransform.localPosition = _heldObjectOffsetRight;
             }
 
@@ -263,8 +261,9 @@ public class PlayerController : MonoBehaviour
 
                 if (_pickUpObj.CompareTag("WandPickup"))
                 {
-                   // State = PlayerStatesEnum.NARRATION;
-                    StartCoroutine(GameManager.Instance.PickupWand());
+                    // State = PlayerStatesEnum.NARRATION;
+                    //StartCoroutine(GameManager.Instance.PickupWand());
+                    AudioManager.Instance.PlayVersionTrack(0);
                     GainWand();
 
                     Destroy(_pickUpObj);
@@ -273,7 +272,8 @@ public class PlayerController : MonoBehaviour
                 else if (_pickUpObj.CompareTag("StorybookPickup"))
                 {
                     //State = PlayerStatesEnum.NARRATION;
-                    StartCoroutine(GameManager.Instance.PickupStoryBook());
+                    //StartCoroutine(GameManager.Instance.PickupStoryBook());
+                    GameManager.Instance.PickupStoryBook();
                     Destroy(_pickUpObj);
                     _pickUpObj = null;
                 }

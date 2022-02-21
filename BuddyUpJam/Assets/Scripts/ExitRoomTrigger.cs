@@ -38,6 +38,8 @@ public class ExitRoomTrigger : MonoBehaviour
 
         if (_isFinalLevel)
         {
+            yield return new WaitForSeconds(1f);
+            GameManager.Instance.HideStoryBook();
             GameManager.Instance.EndGame();
         }
         GameManager.Instance.LoadScene(_sceneName);

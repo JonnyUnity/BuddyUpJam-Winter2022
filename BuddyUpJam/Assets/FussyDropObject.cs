@@ -6,6 +6,8 @@ public class FussyDropObject : DropObject
 {
 
     [SerializeField] private List<GameObject> _acceptedItems;
+    [SerializeField] private AudioClip _dropObjectClip;
+
     public int DroppedObjectCount { get; private set; }
 
     public override void DoDrop(GameObject objectBeingDropped)
@@ -13,6 +15,7 @@ public class FussyDropObject : DropObject
 
         if (_acceptedItems.Contains(objectBeingDropped))
         {
+            AudioManager.Instance.PlayClip(_dropObjectClip);
             DroppedObjectCount++;
             base.DoDrop(objectBeingDropped);
             

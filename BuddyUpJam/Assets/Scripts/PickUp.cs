@@ -13,6 +13,7 @@ public class PickUp : MonoBehaviour
     [SerializeField] private bool _playCoupletsOnce;
 
     [SerializeField] private SpriteRenderer _renderer;
+    private int _originalSortingOrder;
     [SerializeField] private Collider2D _spriteCollider;
 
     private bool _coupletsPlayed;
@@ -28,6 +29,8 @@ public class PickUp : MonoBehaviour
     {
         _transform = transform;
         _interactSpriteTransform = _transform.position + new Vector3(0, 1f, 0);
+        _originalSortingOrder = _renderer.sortingOrder;
+
     }
 
     private void Update()
@@ -119,7 +122,7 @@ public class PickUp : MonoBehaviour
     public void DropObject(DropObject containerObject)
     {
         // reset sorting layer...
-        _renderer.sortingOrder = 0;
+        _renderer.sortingOrder = _originalSortingOrder;
 
         if (_spriteCollider != null)
         {
