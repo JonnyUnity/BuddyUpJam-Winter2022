@@ -167,10 +167,11 @@ public class PlayerController : MonoBehaviour
 
     public void OnSelectObject(InputValue value)
     {
+        if (State == PlayerStatesEnum.RESIZING || State == PlayerStatesEnum.INTERACTING || State == PlayerStatesEnum.NARRATION)
+            return;
+        
         if (_highlightedObj == null)
             return;
-
-
 
         _wandAnimator.SetTrigger("UseWand");
         GameManager.Instance.CheckFirstUseInSecondLevel(1); // wand
@@ -232,7 +233,6 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        Debug.Log("Trying to interact...");
         if (_heldObject != null)
         {
             _heldObject.transform.parent = null;
@@ -261,11 +261,11 @@ public class PlayerController : MonoBehaviour
 
             if (_pickUpObj != null)
             {
-                Debug.Log("Picking up!");
                 State = PlayerStatesEnum.NARRATION;
 
                 if (_pickUpObj.CompareTag("WandPickup"))
                 {
+                   // State = PlayerStatesEnum.NARRATION;
                     StartCoroutine(GameManager.Instance.PickupWand());
                     GainWand();
 
@@ -274,7 +274,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (_pickUpObj.CompareTag("StorybookPickup"))
                 {
-
+                    //State = PlayerStatesEnum.NARRATION;
                     StartCoroutine(GameManager.Instance.PickupStoryBook());
                     Destroy(_pickUpObj);
                     _pickUpObj = null;

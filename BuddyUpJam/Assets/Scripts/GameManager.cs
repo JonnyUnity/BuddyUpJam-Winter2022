@@ -436,10 +436,8 @@ public class GameManager : Singleton<GameManager>
 
     public void ResetSelection(GameObject obj)
     {
-        Debug.Log("Reset selection!");
         Selected s = obj.GetComponent<Selected>();
         s.Reset();
-
     }
 
     public void ClearSelections()
@@ -469,15 +467,7 @@ public class GameManager : Singleton<GameManager>
         State = GameStatesEnum.NARRATION;
 
         _dialogueHandler.NarrationPlaying = true;
-        Debug.Log(_dialogueHandler.NarrationPlaying);
         yield return _dialogueHandler.ShowCouplets(couplets);
-        Debug.Log(_dialogueHandler.NarrationPlaying);
-
-        //while (_dialogueHandler.NarrationPlaying)
-        //{
-        //    Debug.Log(_dialogueHandler.NarrationPlaying);
-        //    //yield return null;
-        //}
 
         State = GameStatesEnum.PLAYING;
         _playerController.ChangeState(PlayerStatesEnum.IDLE);

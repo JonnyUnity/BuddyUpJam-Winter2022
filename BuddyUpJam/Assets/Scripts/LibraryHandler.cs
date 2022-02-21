@@ -5,18 +5,16 @@ using UnityEngine;
 public class LibraryHandler : MonoBehaviour
 {
     [SerializeField] private GameObject _exitTrigger;
-
-    [SerializeField] private GameObject _globeObject;
-    [SerializeField] private GameObject _desiredGlobePosition;
-
     [SerializeField] private GameObject _potObject;
     [SerializeField] private GameObject _desiredPotPosition;
 
+    [SerializeField] private GameObject _globeStandObject;
+    private FussyDropObject _globeContainer;
+
+    [SerializeField] private GameObject _potPickUpObject;
+    private PickUp _potPickUp;
     [SerializeField] private GameObject _potDropInObject;
     private FussyDropObject _potContainer;
-
-    [SerializeField] private GameObject _featherObject;
-    [SerializeField] private GameObject _flowerObject;
 
     private Transform _globeTransform;
     private Transform _featherTransform;
@@ -41,9 +39,11 @@ public class LibraryHandler : MonoBehaviour
 
     private void Start()
     {
-        _globeTransform = _globeObject.transform;
+        //_globeTransform = _globeObject.transform;
         _potTransform = _potObject.transform;
-        _featherTransform = _featherObject.transform;
+        //_featherTransform = _featherObject.transform;
+        _globeContainer = _globeStandObject.GetComponent<FussyDropObject>();
+        _potPickUp = _potPickUpObject.GetComponent<PickUp>();
         _potContainer = _potDropInObject.GetComponent<FussyDropObject>();
 
         // Check every second if puzzle has been solved and player can proceed
@@ -111,6 +111,7 @@ public class LibraryHandler : MonoBehaviour
         
         if (_potTransform.position == _desiredPotPosition.transform.position)
         {
+            //_potPickUp.enabled = false;
             _potDropInObject.SetActive(true);
         }
         else
@@ -119,6 +120,7 @@ public class LibraryHandler : MonoBehaviour
         }
         
         ShrinkEnlarge se = _potObject.GetComponent<ShrinkEnlarge>();
+        _potContainer.UpdateDroppableStatus(se.GetSizeFactor());
         if (se.GetSizeFactor() != 1f)
         {
             return false;
@@ -130,18 +132,21 @@ public class LibraryHandler : MonoBehaviour
 
     private bool IsGlobeCorrect()
     {
-        if (_globeTransform.position != _desiredGlobePosition.transform.position)
-        {
-            return false;
-        }
 
-        ShrinkEnlarge se = _globeObject.GetComponent<ShrinkEnlarge>();
-        if (se.GetSizeFactor() != 1f)
-        {
-            return false;
-        }
+        return (_globeContainer.DroppedObjectCount == 1);
 
-        return true;
+        //if (_globeTransform.position != _desiredGlobePosition.transform.position)
+        //{
+        //    return false;
+        //}
+
+        //ShrinkEnlarge se = _globeObject.GetComponent<ShrinkEnlarge>();
+        //if (se.GetSizeFactor() != 1f)
+        //{
+        //    return false;
+        //}
+
+        //return true;
     }
 
 

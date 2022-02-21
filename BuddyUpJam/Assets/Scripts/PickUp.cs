@@ -55,9 +55,12 @@ public class PickUp : MonoBehaviour
             var playerObj = collision.gameObject;
             if (playerObj.TryGetComponent(out PlayerController controller))
             {
-                _keyPrompt = Instantiate(_interactPromptPrefab, _interactSpriteTransform, Quaternion.identity);
-                controller.SetPickableObject(gameObject);
-                _canInteract = true;
+                if (!controller.IsHoldingObject() && !controller.IsResizing())
+                {
+                    _keyPrompt = Instantiate(_interactPromptPrefab, _interactSpriteTransform, Quaternion.identity);
+                    controller.SetPickableObject(gameObject);
+                    _canInteract = true;
+                }                
             }
         }
     }

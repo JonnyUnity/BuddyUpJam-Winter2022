@@ -14,7 +14,10 @@ public class ExitRoomTrigger : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            AudioManager.Instance.PlayOpenDoorClip();
+            if (!_isFinalLevel)
+            {
+                AudioManager.Instance.PlayOpenDoorClip();
+            }            
             StartCoroutine(WaitForDialogue());
         }
 

@@ -27,6 +27,10 @@ public class ShrinkEnlarge : MonoBehaviour
         _currentScale = _transform.localScale;
         _pickUp = GetComponent<PickUp>();
         _dropObject = GetComponent<DropObject>();
+        if (_dropObject == null)
+        {
+            _dropObject = GetComponentInChildren<DropObject>();
+        }
 
     }
 

@@ -17,12 +17,10 @@ public class SelectObject : MonoBehaviour
     {
         if (collision.CompareTag("CanChangeSize") && GameManager.Instance.CanSelect())
         {
-            Debug.Log("hovering over selectable object " + collision.gameObject.name);
             _renderer = collision.gameObject.GetComponent<Renderer>();
             _renderer.material.SetFloat("_ShowOutline", 1f);
 
             var objectAnchor = collision.transform.parent.gameObject;
-            Debug.Log(objectAnchor.name + " is the parent!");
             _controller.SetHighlightedObject(collision.gameObject, objectAnchor);
         }
     }
