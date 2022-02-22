@@ -1688,7 +1688,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1661898547
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: aba006e7724bea541920fe6b11b7b508, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2132,7 +2132,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1.0973163, y: -0.74123335}
+  m_Offset: {x: -1.1210642, y: -0.74123335}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2143,7 +2143,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1658735, y: 1.7036304}
+  m_Size: {x: 1.1183777, y: 1.7036304}
   m_EdgeRadius: 0
 --- !u!1 &806396043
 GameObject:
@@ -7668,6 +7668,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1513184207307427464, guid: 7b215fd0b8c965548b12d30edf763182, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b215fd0b8c965548b12d30edf763182, type: 3}
 --- !u!1001 &7295627951641341548
@@ -7756,7 +7760,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8228095929149168125, guid: 15597352ccdcd56428d1e4e79b4b9c5f, type: 3}
       propertyPath: _sceneName
-      value: 2_Hallway
+      value: 3_Library
       objectReference: {fileID: 0}
     - target: {fileID: 8228095929149168125, guid: 15597352ccdcd56428d1e4e79b4b9c5f, type: 3}
       propertyPath: _couplets.Array.size
