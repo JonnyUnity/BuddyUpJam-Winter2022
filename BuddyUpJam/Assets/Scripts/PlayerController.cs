@@ -36,8 +36,8 @@ public class PlayerController : MonoBehaviour
     private GameObject _heldObject;
     [SerializeField] private GameObject _heldObjectPosition;
     private Transform _heldObjectTransform;
-    private Vector3 _heldObjectOffset = new Vector3(0.35f, -0.7f, 0);
-    private Vector3 _heldObjectOffsetRight = new Vector3(-0.35f, -0.7f, 0);
+    private Vector3 _heldObjectOffset = new Vector3(0.35f, 1.25f, 0);
+    private Vector3 _heldObjectOffsetRight = new Vector3(-0.35f, 1.25f, 0);
 
     private bool _isFirstMove = true;
     [SerializeField] private Interaction[] _firstMoveCouplets;
@@ -217,6 +217,11 @@ public class PlayerController : MonoBehaviour
     public bool IsHoldingObject()
     {
         return (_heldObject != null);
+    }
+
+    public GameObject HeldObject()
+    {
+        return _heldObject;
     }
 
 
